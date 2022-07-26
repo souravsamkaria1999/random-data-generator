@@ -17,7 +17,6 @@ You may also see any lint errors in the console.
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
@@ -27,10 +26,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
 ### `npm run eject`
-
 **Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
 If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
@@ -39,44 +35,72 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## Storybook
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Build component driven UIs faster
+Storybook is an open source tool for building UI components and pages in isolation.
+It streamlines UI development, testing, and documentation
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Document UI for your team to reuse
+Storybook brings together UI, examples, and documentation in one place. That helps teammates adopt existing UI patterns.
 
-### Code Splitting
+npm run storybook
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+It will start Storybook locally and output the address. Depending on your system configuration, it will automatically open the address in a new browser tab, and you'll be greeted by a welcome screen
 
 ### `npm run buildDependency`
 
-npm install --save-dev @testing-library/react jest
+## npm install --save-dev @testing-library/react jest
 
-npm install react-redux
+Simple and complete React DOM testing utilities that encourage good testing practices.
+The React Testing Library is a very lightweight solution for testing React components. It provides light utility functions on top of react-dom and react-dom/test-utils, in a way that encourages better testing practices. Its primary guiding principle is:
 
-npm install axios
+The more your tests resemble the way your software is used, the more confidence they can give you.
 
-npm install cors
+Jest matchers and utilities for testing React Test Renderer.
 
-npm install express
+## npm install react-redux
+
+React-Redux is conceptually pretty simple. It subscribes to the Redux store, checks to see if the data your component wants has changed, and re-renders your component.
+
+## npm install axios
+
+Promise based HTTP client for the browser and node.js
+
+Features
+Make XMLHttpRequests from the browser
+Make http requests from node.js
+Supports the Promise API
+Intercept request and response
+Transform request and response data
+Cancel requests
+Automatic transforms for JSON data
+Client side support for protecting against XSRF
+
+## npm install express
+
+Fast, unopinionated, minimalist web framework for node.
+
+const express = require('express')
+const app = express()
+
+app.get('/', function (req, res) {
+res.send('Hello World')
+})
+
+app.listen(8000)
+
+## npm install cors
+
+This is a Node.js module available through the npm registry. Installation is done using the npm install command:
+
+$ npm install cors
+
+Usage
+
+Simple Usage (Enable All CORS Requests)
+var express = require('express')
+var cors = require('cors')
+var app = express()
+
+app.use(cors())

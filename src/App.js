@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import "./App.css";
 import ResourceLoader from "./helper/api";
 import UserInfoGit from "./ContainerComponents/UserInfoGit";
+
+import TodoList from "./store/TodoList"; 
 function App() {
   const [theme, setTheme] = useState("light");
 
@@ -24,6 +26,8 @@ function App() {
         >
           <UserInfoGit />
         </ResourceLoader>
+         {/* Redux  */}
+         <TodoList />
       </div>
       <div className="App">
         <header className="App-header">
