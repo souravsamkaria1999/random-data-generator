@@ -15,6 +15,25 @@ exports[`should take a snapshot 1`] = `
     <p>
       Loading...
     </p>
+    <div
+      class="list-wrapper"
+    >
+      <div
+        class="new-todo-form"
+      >
+        <input
+          class="new-todo-input"
+          placeholder="Type your new todo here"
+          type="text"
+          value=""
+        />
+        <button
+          class="new-todo-button"
+        >
+          Create Todo
+        </button>
+      </div>
+    </div>
   </div>
   <div
     class="App"

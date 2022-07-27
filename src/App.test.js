@@ -1,9 +1,14 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
+import { Provider } from "react-redux";
+import { configureStore } from "./store";
 
 test("renders GitHub User Data", () => {
-  render(<App />);
+  render(
+    <Provider store={configureStore()}>
+      <App />
+      </Provider>);
   const linkElement = screen.getByText(/GitHub User Data/i);
   expect(linkElement).toBeInTheDocument();
 
@@ -11,7 +16,8 @@ test("renders GitHub User Data", () => {
 });
 
 test("Test theme button toggle", () => {
-  render(<App />);
+  render(
+    <Provider store={configureStore()}><App />  </Provider>);
   const buttonEl = screen.getByText(/Current theme/i);
 
   userEvent.click(buttonEl);
@@ -19,7 +25,11 @@ test("Test theme button toggle", () => {
 });
 
 it("should take a snapshot", () => {
-  const { asFragment } = render(<App />);
+  const { asFragment } = render(
+    <Provider store={configureStore()}>
+  <App />
+  </Provider>);
 
-  expect(asFragment(<App />)).toMatchSnapshot();
+  expect(asFragment(
+    <Provider store={configureStore()}><App />  </Provider>)).toMatchSnapshot();
 });

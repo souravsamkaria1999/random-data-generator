@@ -11,31 +11,18 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
+for run testcase Use command:    npm test 
 
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-### `npm run eject`
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
 ## Storybook
+
 
 Build component driven UIs faster
 Storybook is an open source tool for building UI components and pages in isolation.
@@ -44,7 +31,7 @@ It streamlines UI development, testing, and documentation
 Document UI for your team to reuse
 Storybook brings together UI, examples, and documentation in one place. That helps teammates adopt existing UI patterns.
 
-npm run storybook
+command for run storybook:    npm run storybook 
 
 It will start Storybook locally and output the address. Depending on your system configuration, it will automatically open the address in a new browser tab, and you'll be greeted by a welcome screen
 
@@ -52,18 +39,108 @@ It will start Storybook locally and output the address. Depending on your system
 
 ## npm install --save-dev @testing-library/react jest
 
-Simple and complete React DOM testing utilities that encourage good testing practices.
-The React Testing Library is a very lightweight solution for testing React components. It provides light utility functions on top of react-dom and react-dom/test-utils, in a way that encourages better testing practices. Its primary guiding principle is:
+Snapshot test is added
+Test Content
+Test context Use case is added
 
-The more your tests resemble the way your software is used, the more confidence they can give you.
+for reference Test and TestUseCase folder
 
-Jest matchers and utilities for testing React Test Renderer.
+## npm install redux
 
 ## npm install react-redux
 
 React-Redux is conceptually pretty simple. It subscribes to the Redux store, checks to see if the data your component wants has changed, and re-renders your component.
 
+Use for Global State management
+
+Added folder name store , store.js for configure store
+
+# actions
+
+import { get } from "../api/axios.js";
+
+export const CREATE_TODO = "CREATE_TODO";
+export const createTodo = (text) => ({
+type: CREATE_TODO,
+payload: { text },
+});
+
+export const REMOVE_TODO = "REMOVE_TODO";
+export const removeTodo = (text) => ({
+type: REMOVE_TODO,
+payload: { text },
+});
+
+# reducers
+
+import { CREATE_TODO, REMOVE_TODO, USER_ROLE_SUCCESS } from "./actions";
+
+export const todos = (state = [], action) => {
+const { type, payload } = action;
+
+switch (type) {
+case CREATE_TODO: {
+const { text } = payload;
+const newTodo = {
+text,
+isCompleted: false,
+};
+return state.concat(newTodo);
+}
+
+    case REMOVE_TODO: {
+      const { text } = payload;
+      return state.filter((todo) => todo.text !== text);
+    }
+
+    default:
+      return state;
+
+}
+};
+
+# Inside Component
+
+import React from "react";
+import { removeTodo } from "./actions";
+import { connect } from "react-redux";
+import NewTodoForm from "./NewTodoForm";
+import TodoListItem from "./TodoListItem";
+
+const TodoList = ({ todos = [], onRemovePressed }) => (
+
+  <div className="list-wrapper">
+    <NewTodoForm />
+    {todos.map((todo) => (
+      <TodoListItem todo={todo} onRemovePressed={onRemovePressed} />
+    ))}
+  </div>
+);
+
+const mapStateToProps = (state) => ({
+todos: state.todos,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+onRemovePressed: (text) => dispatch(removeTodo(text)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
+
 ## npm install axios
+
+Added api folder for use import api/axios.js into your component and use the same
+
+export function getUserRole(userId) {
+return async () => {
+const response = await get(`Path/${userId}`);
+if (response && response.status === 200 && response.data) {
+getUsersRoleSuccess(response.data);
+} else {
+getUsersRoleFailure("Please Try again");
+}
+};
+}
 
 Promise based HTTP client for the browser and node.js
 
