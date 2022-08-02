@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import "./App.css";
 import ResourceLoader from "./helper/api";
 import UserInfoGit from "./ContainerComponents/UserInfoGit";
-
+import User from "./context/user";
+import AuthData from "./context/AuthState";
 import TodoList from "./store/TodoList"; 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -16,6 +17,8 @@ function App() {
   const api_url = process.env.REACT_APP_API_ENDPOINT;
   return (
     <>
+     <AuthData>
+        <User />
       <div className="App">
         <header className="App-header">
           <h2>GitHub User Data</h2>
@@ -34,6 +37,7 @@ function App() {
           <button onClick={toggleTheme}>Current theme: {theme}</button>
         </header>
       </div>
+      </AuthData>
     </>
   );
 }

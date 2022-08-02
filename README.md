@@ -13,31 +13,23 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ### `npm test`
 
-for run testcase Use command:    npm test 
+Launches the test runner in the interactive watch mode.\
 
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-Your app is ready to be deployed!
 
 ## Storybook
-
 
 Build component driven UIs faster
 Storybook is an open source tool for building UI components and pages in isolation.
 It streamlines UI development, testing, and documentation
 
-Document UI for your team to reuse
-Storybook brings together UI, examples, and documentation in one place. That helps teammates adopt existing UI patterns.
-
-command for run storybook:    npm run storybook 
+### npm run storybook
 
 It will start Storybook locally and output the address. Depending on your system configuration, it will automatically open the address in a new browser tab, and you'll be greeted by a welcome screen
-
-### `npm run buildDependency`
-
-## npm install --save-dev @testing-library/react jest
+ 
+### npm install --save-dev @testing-library/react jest
 
 Snapshot test is added
 Test Content
@@ -45,9 +37,9 @@ Test context Use case is added
 
 for reference Test and TestUseCase folder
 
-## npm install redux
+### npm install redux
 
-## npm install react-redux
+### npm install react-redux
 
 React-Redux is conceptually pretty simple. It subscribes to the Redux store, checks to see if the data your component wants has changed, and re-renders your component.
 
@@ -55,7 +47,7 @@ Use for Global State management
 
 Added folder name store , store.js for configure store
 
-# actions
+## actions
 
 import { get } from "../api/axios.js";
 
@@ -71,7 +63,7 @@ type: REMOVE_TODO,
 payload: { text },
 });
 
-# reducers
+## reducers
 
 import { CREATE_TODO, REMOVE_TODO, USER_ROLE_SUCCESS } from "./actions";
 
@@ -127,7 +119,7 @@ onRemovePressed: (text) => dispatch(removeTodo(text)),
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
 
-## npm install axios
+### npm install axios
 
 Added api folder for use import api/axios.js into your component and use the same
 
@@ -154,7 +146,7 @@ Cancel requests
 Automatic transforms for JSON data
 Client side support for protecting against XSRF
 
-## npm install express
+### npm install express
 
 Fast, unopinionated, minimalist web framework for node.
 
@@ -167,7 +159,7 @@ res.send('Hello World')
 
 app.listen(8000)
 
-## npm install cors
+### npm install cors
 
 This is a Node.js module available through the npm registry. Installation is done using the npm install command:
 
@@ -181,3 +173,8 @@ var cors = require('cors')
 var app = express()
 
 app.use(cors())
+
+### Added Context 
+Add context folder inside this Authcontext.js , AuthData.js filefor creating and provide context data
+user.js consumes the context 
+Add wrapper in App.js file for context 
