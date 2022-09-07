@@ -7,6 +7,7 @@ import Footer from "./ContainerComponents/Layout/Footer/Footer";
 import HomePage from "./ContainerComponents/HomePage/HomePage";
 import GitUserDetails from "./ContainerComponents/GitUserDetails/GitUserDetails";
 import Header from './ContainerComponents/Layout/Header/Header';
+import About from './ContainerComponents/About/About';
 const App = () => {
   return (
     <>
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/UserInfoGit" component={GitUserDetails} />
         <Route path="/TodoList" component={TodoList} />
         <Route path="/Theme" component={Theme} />
+        <Route path="/About" component={About} />
       </Switch>
       <Footer/>
     </>

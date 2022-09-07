@@ -23,6 +23,16 @@ Builds the app for production to the `build` folder.\
 
 React Router is a collection of navigational components that compose declaratively with your application.
 
+## app.js
+
+ <Switch>
+        <Route path="/Home" component={HomePage} />
+        <Route path="/UserInfoGit" component={GitUserDetails} />
+        <Route path="/TodoList" component={TodoList} />
+        <Route path="/Theme" component={Theme} />
+        <Route path="/About" component={About} />
+      </Switch>
+
 ## index.js
 
 import React from "react";
