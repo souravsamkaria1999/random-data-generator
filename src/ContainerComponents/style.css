@@ -1,0 +1,38 @@
+.data-heading {
+  font-size: 24px;
+  font-family: "Montserrat";
+  text-align: center;
+}
+
+.github-user-data {
+  border: 1px solid;
+  width: 450px;
+  margin: 50px auto;
+}
+
+.github-user-info {
+  font-size: 22px;
+  text-align: center;
+}
+
+.data-label-user-heading {
+  font-size: 20px;
+  margin: 0px;
+  padding: 20px;
+  font-weight: 600;
+  font-family: "Montserrat";
+}
+.data-label-heading {
+  font-size: 20px;
+  margin: 0px;
+  padding: 20px;
+  font-weight: 600;
+  font-family: "Montserrat";
+  border-top: 1px solid;
+}
+.data-values {
+  font-size: 18px;
+  font-family: "Montserrat";
+  margin-top: -10px;
+  color: blue;
+}

@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const ProductInfo = ({ product }) => {
-  const { id, name, price, description, rating } = product || {}
+  const { id, name, price, description, rating } = product || {};
   return product ? (
     <>
       <h3>{name}</h3>
@@ -12,7 +12,7 @@ const ProductInfo = ({ product }) => {
     </>
   ) : (
     <p>Loading...</p>
-  )
-}
+  );
+};
 
-export default ProductInfo
+export default ProductInfo;

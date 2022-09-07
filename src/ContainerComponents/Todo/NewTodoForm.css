@@ -24,5 +24,8 @@
   cursor: pointer;
   margin-left: 8px;
   width: 20%;
-  background-color: #22ee22;
+  font-weight: 500;
+  color: white;
+  font-family: "Montserrat";
+  background-color: #007bff;
 }

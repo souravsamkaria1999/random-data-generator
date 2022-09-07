@@ -36,6 +36,8 @@ const Wrapper = () => {
       <DataSource resourceName='user' getDataFunc={getLocalStorageData('user')}>
         <UserInfo />
       </DataSource>
+
+      
     </>
   )
 }

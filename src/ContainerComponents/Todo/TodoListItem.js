@@ -3,7 +3,7 @@ import "./TodoListItem.css";
 
 const TodoListItem = ({ todo, onRemovePressed }) => (
   <div className="todo-item-container">
-    <h3>{todo.text}</h3>
+    <li className="add-todo-text">{todo.text}</li>
     <div className="buttons-container">
       <button className="completed-button">Mark As Completed</button>
       <button
