@@ -19,6 +19,40 @@ Launches the test runner in the interactive watch mode.\
 
 Builds the app for production to the `build` folder.\
 
+### `npm install react-router-dom@5`
+
+React Router is a collection of navigational components that compose declaratively with your application.
+
+## app.js
+
+ <Switch>
+        <Route path="/Home" component={HomePage} />
+        <Route path="/UserInfoGit" component={GitUserDetails} />
+        <Route path="/TodoList" component={TodoList} />
+        <Route path="/Theme" component={Theme} />
+        <Route path="/About" component={About} />
+      </Switch>
+
+## index.js
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { Provider } from "react-redux";
+import { configureStore } from "./store";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+<Provider store={configureStore()}>
+<BrowserRouter>
+<App />
+</BrowserRouter>
+</Provider>
+);
+
 ## Storybook
 
 Build component driven UIs faster
@@ -28,7 +62,7 @@ It streamlines UI development, testing, and documentation
 ### npm run storybook
 
 It will start Storybook locally and output the address. Depending on your system configuration, it will automatically open the address in a new browser tab, and you'll be greeted by a welcome screen
- 
+
 ### npm install --save-dev @testing-library/react jest
 
 Snapshot test is added
@@ -174,7 +208,8 @@ var app = express()
 
 app.use(cors())
 
-### Added Context 
+### Added Context
+
 Add context folder inside this Authcontext.js , AuthData.js filefor creating and provide context data
-user.js consumes the context 
-Add wrapper in App.js file for context 
+user.js consumes the context
+Add wrapper in App.js file for context

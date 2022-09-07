@@ -1,0 +1,9 @@
+.welcome-text {
+    font-size: 45px;
+    font-family: "Montserrat";
+    font-weight: 600;
+    text-align: center;
+    /* border-top: 2px solid #d7d7d7; */
+    padding: 220px;
+    color: rgb(86, 86, 197);
+  }

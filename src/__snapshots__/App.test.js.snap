@@ -2,49 +2,50 @@
 
 exports[`should take a snapshot 1`] = `
 <DocumentFragment>
-  <div
-    class="App"
+  <section
+    class="header-top__navigation"
   >
-    <header
-      class="App-header"
+    <section
+      class="navbar"
     >
-      <h2>
-        GitHub User Data
-      </h2>
-    </header>
-    <p>
-      Loading...
-    </p>
-    <div
-      class="list-wrapper"
-    >
-      <div
-        class="new-todo-form"
+      <a
+        class="navbar-item"
+        href="/Home"
       >
-        <input
-          class="new-todo-input"
-          placeholder="Type your new todo here"
-          type="text"
-          value=""
-        />
-        <button
-          class="new-todo-button"
-        >
-          Create Todo
-        </button>
-      </div>
-    </div>
-  </div>
-  <div
-    class="App"
+        Home
+      </a>
+      <a
+        class="navbar-item"
+        href="/UserInfoGit"
+      >
+        User-Info
+      </a>
+      <a
+        class="navbar-item"
+        href="/TodoList"
+      >
+        Add Todo
+      </a>
+      <a
+        class="navbar-item"
+        href="/Theme"
+      >
+        Theme
+      </a>
+      <a
+        class="navbar-item"
+        href="/About"
+      >
+        About
+      </a>
+    </section>
+  </section>
+  <main
+    class="footer-main"
   >
-    <header
-      class="App-header"
-    >
-      <button>
-        Current theme: light
-      </button>
-    </header>
-  </div>
+    <p>
+       © 2022 SacroLabs Softwares, All rights reserved. 
+    </p>
+  </main>
 </DocumentFragment>
 `;
