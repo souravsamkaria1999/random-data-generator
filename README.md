@@ -213,3 +213,4 @@ app.use(cors())
 Add context folder inside this Authcontext.js , AuthData.js filefor creating and provide context data
 user.js consumes the context
 Add wrapper in App.js file for context
+# random-user-generator
