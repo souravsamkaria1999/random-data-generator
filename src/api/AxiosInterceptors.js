@@ -9,6 +9,8 @@ const generateHeaderReq = (config, accessToken) => {
   return config;
 };
 
+
+
 // Add a request interceptor
 axios.interceptors.request.use((config) => {
   // eslint-disable-next-line no-unused-vars
