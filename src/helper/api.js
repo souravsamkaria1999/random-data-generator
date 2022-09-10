@@ -11,6 +11,7 @@ const ResourceLoader = ({ children, resourceUrl, resourceName }) => {
       setResource(currentresource);
     })();
   }, [resourceUrl]);
+  console.log(resourceName)
 
   return (
     <>

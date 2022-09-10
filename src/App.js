@@ -1,27 +1,23 @@
 import React from "react";
-import "./App.css";
-import { Switch,Route } from "react-router-dom";
-import TodoList from "./ContainerComponents/Todo/TodoList";
-import Theme from "./ContainerComponents/Theme/Theme";
-import Footer from "./ContainerComponents/Layout/Footer/Footer";
-import HomePage from "./ContainerComponents/HomePage/HomePage";
-import GitUserDetails from "./ContainerComponents/GitUserDetails/GitUserDetails";
-import Header from './ContainerComponents/Layout/Header/Header';
-import About from './ContainerComponents/About/About';
+import Alotted from "./components/Alotted/index";
+import FlatSlot from "./components/FlatSlot/index";
+import ParkingSlot from "./components/ParkingSlot/index";
 const App = () => {
   return (
     <>
-    <Header/>
-      <Switch>
-        <Route path="/Home" component={HomePage} />
-        <Route path="/UserInfoGit" component={GitUserDetails} />
-        <Route path="/TodoList" component={TodoList} />
-        <Route path="/Theme" component={Theme} />
-        <Route path="/About" component={About} />
-      </Switch>
-      <Footer/>
+      <div style={{ display: "flex", marginRight: "30px" }}>
+        <FlatSlot />
+        <div style={{ marginLeft: "50px" }}>
+          <ParkingSlot />
+        </div>
+
+        <div style={{ marginLeft: "50px" }}>
+          <Alotted />
+        </div>
+      </div>
+
+      <center> </center>
     </>
   );
 };
-
 export default App;
