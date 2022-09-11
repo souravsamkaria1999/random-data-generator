@@ -7,11 +7,7 @@ const generateHeaderReq = (config, accessToken) => {
     config.headers["Authorization"] = `Bearer ${accessToken}`;
   }
   return config;
-
-  
 };
-
-
 
 // Add a request interceptor
 axios.interceptors.request.use((config) => {
