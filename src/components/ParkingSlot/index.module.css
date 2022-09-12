@@ -1,20 +1,22 @@
 .box {
-    border: 1px solid;
-    height: 100px;
-    width: 200px;
-    overflow-x: hidden;
-  }
-  .list {
-    display: flex;
-  }
-  #one {
-    width: 33.3%;
-    border: 1px solid;
-    margin: 10px;
-    padding: 5px;
-    list-style: none;
-    text-align: center;
-  }
-  #one {
-    float: left;
-  }
+  border: 1px solid;
+  height: 100px;
+  width: 250px;
+  overflow-x: hidden;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.list {
+  display: flex;
+}
+#one {
+  width: 33.3%;
+  border: 1px solid;
+  margin: 10px;
+  padding: 5px;
+  list-style: none;
+  text-align: center;
+}
+#one {
+  float: left;
+}

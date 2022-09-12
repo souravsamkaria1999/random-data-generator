@@ -1,30 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 import classes from "./index.module.css";
 
-const Alotted = ({
-  datas,
-  ParkingRandomValue,
-  ParkingDatas,
-  flatRandomValue,
-  SlotsHandler,
-}) => {
+const Alotted = ({ SlotsHandler, flatRandomNumber, parkingRandomNumber }) => {
+  const [disabled, setDisabled] = React.useState(false);
+
+  const slotHandler = () => {
+    SlotsHandler();
+    setDisabled(true);
+  };
   return (
     <main style={{ marginTop: "43px", width: "350px" }}>
       <center>
-        <div>Alotted Slot </div>
+        <h4>Alotted Slot </h4>
       </center>
-      {datas}
-      <br />
-
-      {ParkingDatas}
       <div className={classes.box}>
-        {flatRandomValue} ---{ParkingRandomValue}
+        {flatRandomNumber}
+        <br />
+        <br />
+
+        {parkingRandomNumber}
       </div>
       <br />
       <center>
         {" "}
-        <button onClick={SlotsHandler} style={{ marginLeft: "10px" }}>
-          get a random data
+        <button
+          disabled={disabled}
+          onClick={slotHandler}
+          style={{ marginLeft: "10px" }}
+        >
+          Get a random setValue
         </button>
       </center>
     </main>

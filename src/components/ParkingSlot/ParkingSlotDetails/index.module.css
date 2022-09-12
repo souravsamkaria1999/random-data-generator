@@ -1,8 +1,10 @@
 .box {
-    border: 1px solid;
-    height: 100px;
-    width: 200px;
-    overflow-x: hidden;
+  border: 1px solid;
+  height: 100px;
+  width: 250px;
+  overflow-x: hidden;
+  margin-left: 10px;
+  margin-right: 10px;
   }
   .list {
     display: flex;

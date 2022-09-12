@@ -1,93 +1,55 @@
 import React, { useState, useEffect } from "react";
-import classes from "./index.module.css";
 import FlatSlotInfo from "./FlatSlotInfo/index";
 
-const FlatSlot = ({ datas, array1, getFlatData }) => {
-  const [flatSlotInput, setFlatSlotInput] = useState("");
+const FlatSlot = ({ flatListArray, getFlatData }) => {
+  const [flatSlotInput, setFlatSlotInput] = useState();
   const [flatSlotList, setFlatSlotList] = useState(getFlatData());
-  const [value, setValue] = useState(true);
+  const [disabled, setDisabled] = React.useState(false);
+
   const inputChangeHandler = (e) => {
     setFlatSlotInput(e.target.value);
   };
+
+  const checkflatValue = flatSlotList.map((item) =>
+    item == flatSlotInput ? 1 : 0
+  );
+
   const FlatInputSubmitHandler = (e) => {
-    setValue(false);
     e.preventDefault();
     setFlatSlotList([...flatSlotList, flatSlotInput]);
-
     setFlatSlotInput("");
+    setDisabled(true);
+    // window.location.reload();
   };
   useEffect(() => {
     localStorage.setItem("Flat list", JSON.stringify(flatSlotList));
   }, [flatSlotList]);
-  // console.log(flatSlotList);
-  // console.log(flatSlotInput.length > 3 ? flatSlotInput : "dsa");
+
   return (
     <main>
-      <h4>flats </h4>
-      <div className={classes.box}>{datas}</div>
+      <center>
+        {" "}
+        <h4 style={{ marginBottom: "0px", marginTop: "50px" }}>flats </h4>
+      </center>
+      <FlatSlotInfo flatListArray={flatListArray} />
       <br />
-      <form onSubmit={FlatInputSubmitHandler}>
-        <input
-          id="todo-input"
-          type="text"
-          value={flatSlotInput}
-          onChange={inputChangeHandler}
-          // disabled={!value}
-        />
-        <button
-        //  disabled={!flatSlotInput}
-        >
-          Lock Listing
-        </button>{" "}
-      </form>
+      <input
+        id="todo-input"
+        type="text"
+        value={flatSlotInput}
+        onChange={inputChangeHandler}
+        style={{ width: "100px", marginLeft: "40px" }}
+      />
+      <button
+        type="submit"
+        disabled={checkflatValue.includes(1)}
+        onClick={FlatInputSubmitHandler}
+      >
+        Lock Flatslot
+      </button>{" "}
+      <p>{checkflatValue.includes(1) ? "not available" : ""}</p>
     </main>
   );
 };
 
 export default FlatSlot;
-
-// import React, { useState } from "react";
-// import classes from "./index.module.css";
-
-// const FlatSlot = ({ datas,flatSlotList, setFlatSlotList }) => {
-//   const [flatSlotInput, setFlatSlotInput] = useState("");
-//   const [value, setValue] = useState(true);
-//   const inputChangeHandler = (e) => {
-//     setFlatSlotInput(e.target.value);
-//   };
-//   const FlatInputSubmitHandler = (e) => {
-//     setValue(false);
-//     e.preventDefault();
-//     setFlatSlotList([...flatSlotList, flatSlotInput]);
-//     setFlatSlotInput("");
-//   };
-//   // useEffect(() => {
-//   //   localStorage.setItem("Flat list", JSON.stringify(flatSlotList));
-//   // }, [flatSlotList]);
-
-//   return (
-//     <main>
-//         <h4>flats </h4>
-
-//       <div className={classes.box}>
-
-//       <table>{datas} </table>
-
-//       </div>
-
-//       <br />
-//       <form onSubmit={FlatInputSubmitHandler}>
-//         <input
-//           id="todo-input"
-//           type="text"
-//           value={flatSlotInput}
-//           onChange={inputChangeHandler}
-//           // disabled={!value}
-//         />
-//         <button>Lock Listing</button>{" "}
-//       </form>
-//     </main>
-//   );
-// };
-
-// export default FlatSlot;
