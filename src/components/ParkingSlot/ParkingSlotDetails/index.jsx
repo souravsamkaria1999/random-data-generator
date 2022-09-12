@@ -4,7 +4,10 @@ const ParkingSlotDetails = ({ parkingSlotArray }) => {
   const ParkingSlotValue = parkingSlotArray.map((value, index, key) => {
     return <div key={index}>{value}</div>;
   });
-  return <div className={classes.box}>{ParkingSlotValue}</div>;
-};
+
+  return ( <>
+
+  <div className={classes.box}>{ParkingSlotValue}</div>
+</>)};
 
 export default ParkingSlotDetails;

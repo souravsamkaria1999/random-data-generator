@@ -30,7 +30,6 @@ const Card = () => {
 
   const [flatRandomNumber, setFlatRandomNumber] = useState();
   const [parkingRandomNumber, setParkingRandomNumber] = useState();
-
   const SlotsHandler = () => {
     setFlatRandomNumber([flatRandomValue]);
     setParkingRandomNumber([ParkingRandomValue]);

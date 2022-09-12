@@ -28,7 +28,7 @@ const Alotted = ({ SlotsHandler, flatRandomNumber, parkingRandomNumber }) => {
           onClick={slotHandler}
           style={{ marginLeft: "10px" }}
         >
-          Get a random setValue
+          Get a random value
         </button>
       </center>
     </main>

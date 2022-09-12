@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ParkingSlotDetails from "./ParkingSlotDetails";
 
 const ParkingSlot = ({ parkingSlotArray, getParkingData }) => {
-  const [parkingSlotInput, setParkingSlotInput] = useState("P:  ");
+  const [parkingSlotInput, setParkingSlotInput] = useState();
   const [parkingSlotList, setParkingSlotList] = useState(getParkingData());
 
   const inputChangeHandler = (e) => {
@@ -14,14 +14,15 @@ const ParkingSlot = ({ parkingSlotArray, getParkingData }) => {
   );
   const ParkingInputSubmitHandler = (e) => {
     e.preventDefault();
-    setParkingSlotList([...parkingSlotList, parkingSlotInput]);
+    setParkingSlotList([...parkingSlotList, "P: " + parkingSlotInput]);
     setParkingSlotInput("");
-    // window.location.reload();
+    window.location.reload();
   };
 
   useEffect(() => {
     localStorage.setItem("Parking-slot-list", JSON.stringify(parkingSlotList));
   }, [parkingSlotList]);
+
   return (
     <main>
       <center>
@@ -37,6 +38,7 @@ const ParkingSlot = ({ parkingSlotArray, getParkingData }) => {
         type="text"
         value={parkingSlotInput}
         onChange={inputChangeHandler}
+        placeholder="P:"
         style={{ width: "100px", marginLeft: "35px" }}
       />
       <button
