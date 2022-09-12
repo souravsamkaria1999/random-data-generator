@@ -1,24 +1,33 @@
 import React from "react";
+import { styled } from "@mui/material/styles";
+
 import classes from "./index.module.css";
-
-const Alotted = ({ SlotsHandler, flatRandomNumber, parkingRandomNumber }) => {
+import Paper from "@mui/material/Paper";
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
+const Alotted = ({ SlotsHandler, updatedValue }) => {
   const [disabled, setDisabled] = React.useState(false);
-
   const slotHandler = () => {
     SlotsHandler();
     setDisabled(true);
   };
+  const flatFinalValue = [updatedValue?.[0]];
+  const parkingFinalValue = [updatedValue?.[1]];
+
   return (
-    <main style={{ marginTop: "43px", width: "350px" }}>
+    <Item sx={{ bgcolor: "#cfe8fc" ,}}>
       <center>
         <h4>Alotted Slot </h4>
       </center>
       <div className={classes.box}>
-        {flatRandomNumber}
+        {flatFinalValue}
         <br />
-        <br />
-
-        {parkingRandomNumber}
+        {parkingFinalValue}
       </div>
       <br />
       <center>
@@ -31,7 +40,7 @@ const Alotted = ({ SlotsHandler, flatRandomNumber, parkingRandomNumber }) => {
           Get a random value
         </button>
       </center>
-    </main>
+    </Item>
   );
 };
 

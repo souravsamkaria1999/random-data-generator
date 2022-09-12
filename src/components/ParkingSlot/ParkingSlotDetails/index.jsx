@@ -5,9 +5,11 @@ const ParkingSlotDetails = ({ parkingSlotArray }) => {
     return <div key={index}>{value}</div>;
   });
 
-  return ( <>
-
-  <div className={classes.box}>{ParkingSlotValue}</div>
-</>)};
+  return (
+    <>
+      {ParkingSlotValue}
+    </>
+  );
+};
 
 export default ParkingSlotDetails;
