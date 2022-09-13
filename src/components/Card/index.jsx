@@ -33,7 +33,7 @@ const getParkingData = () => {
 };
 
 const getAlottedData = () => {
-  let list = localStorage.getItem("Alotted-slot-list");
+  let list = localStorage.getItem("Alotted-slot-list2");
   if (list) {
     return JSON.parse(list);
   } else {
@@ -57,23 +57,34 @@ const Card = () => {
     const ParkingIndex = parkingSlotList.indexOf(ParkingRandomValue);
     parkingSlotList.splice(ParkingIndex, 1);
   };
+  const flatFinalValue = [updatedValue?.[0]];
+  const parkingFinalValue = [updatedValue?.[1]];
   React.useEffect(() => {
     localStorage.setItem("Alotted-slot-list", JSON.stringify(updatedValue));
-  }, [updatedValue]);
+    localStorage.setItem("Flat list", JSON.stringify(flatSlotList));
+    localStorage.setItem("Parking-slot-list", JSON.stringify(parkingSlotList));
+    localStorage.removeItem("flatFinalValue");
+    localStorage.removeItem("parkingFinalValue");
+  }, [flatFinalValue, parkingFinalValue, flatSlotList, parkingSlotList]);
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <FlatSlot flatListArray={flatSlotList} getFlatData={getFlatData} />
+      <Box >
+        <Grid container spacing={0}>
+          <Grid item xs={5} style={{ margin: "auto" }}>
+            <FlatSlot
+              flatSlotList={flatSlotList}
+              setFlatSlotList={setFlatSlotList}
+              getFlatData={getFlatData}
+            />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={5} style={{ margin: "auto" }}>
             <ParkingSlot
-              parkingSlotArray={parkingSlotList}
+              parkingSlotList={parkingSlotList}
+              setParkingSlotList={setParkingSlotList}
               getParkingData={getParkingData}
             />
           </Grid>
-          <Grid item xs={6} style={{margin:'auto'}}>
+          <Grid item xs={5} style={{ margin: "auto" }}>
             <Alotted SlotsHandler={SlotsHandler} updatedValue={updatedValue} />
           </Grid>
         </Grid>

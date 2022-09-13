@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import classes from "./index.module.css";
 import ParkingSlotDetails from "./ParkingSlotDetails";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
 
+import { Box, Button, Typography } from "@mui/material";
+import { ParkingSlotContent } from "../../Content";
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
+  backgroundColor: theme.palette.mode === "dark" ? "#828382" : "#F0F8FD",
+  padding: theme.spacing(5),
+  margin: theme.spacing(1),
 }));
-const ParkingSlot = ({ parkingSlotArray, getParkingData }) => {
+const ParkingSlot = ({ parkingSlotList, setParkingSlotList }) => {
   const [parkingSlotInput, setParkingSlotInput] = useState();
-  const [parkingSlotList, setParkingSlotList] = useState(getParkingData());
 
   const inputChangeHandler = (e) => {
     setParkingSlotInput(e.target.value);
   };
 
   const checkParkingValue = parkingSlotList.map((item) =>
-    item == parkingSlotInput ? 1 : 0
+    item == "P: " + parkingSlotInput ? 1 : 0
   );
   const ParkingInputSubmitHandler = (e) => {
     e.preventDefault();
@@ -27,31 +28,51 @@ const ParkingSlot = ({ parkingSlotArray, getParkingData }) => {
       [...parkingSlotList, "P: " + parkingSlotInput].reverse()
     );
     setParkingSlotInput("");
-    window.location.reload();
   };
-
-  useEffect(() => {
-    localStorage.setItem("Parking-slot-list", JSON.stringify(parkingSlotList));
-  }, [parkingSlotList]);
-
+  const checkParkingInput = checkParkingValue.includes(1);
+  const checkInputSpacing =
+    parkingSlotInput && parkingSlotInput.includes(" ") ? true : false;
+  const startBtnHandler = parkingSlotInput?.length > 3 ? false : true;
+  console.log(ParkingSlotContent);
   return (
-    <Item sx={{ bgcolor: "#cfe8fc" }}>
-      <h4>Parking Slot </h4>
-      <ParkingSlotDetails parkingSlotArray={parkingSlotArray} />
-      <input
-        id="todo-input"
-        type="text"
-        value={parkingSlotInput}
-        onChange={inputChangeHandler}
-        placeholder="P:"
-      />
-      <button
-        disabled={checkParkingValue.includes(1)}
-        onClick={ParkingInputSubmitHandler}
-      >
-        Lock ParkingSlot
-      </button>{" "}
-      <p>{checkParkingValue.includes(1) ? "not available" : ""}</p>
+    <Item>
+      <Typography variant="heading" className={classes.heading}>
+        {ParkingSlotContent[0]}
+      </Typography>
+      <hr />
+      <ParkingSlotDetails parkingSlotList={parkingSlotList} />
+      <Box component="form" noValidate autoComplete="off">
+        <TextField
+          sx={{
+            mt: 4,
+            ml: 0,
+            width: "25ch",
+          }}
+          size="medium"
+          error={checkParkingValue.includes(1) ? true : false}
+          label={
+            checkParkingValue.includes(1)
+              ? ParkingSlotContent[1]
+              : ParkingSlotContent[2]
+          }
+          type="text"
+          value={parkingSlotInput}
+          helperText={
+            checkParkingValue.includes(1) ? "Value already exists" : ""
+          }
+          onChange={inputChangeHandler}
+        />
+
+        <Button
+          sx={{ mt: 5, ml: 1, p: 1, width: "12ch" }}
+          type={ParkingSlotContent[3]}
+          disabled={checkParkingInput || checkInputSpacing || startBtnHandler}
+          onClick={ParkingInputSubmitHandler}
+          variant="contained"
+        >
+          {ParkingSlotContent[3]}
+        </Button>
+      </Box>
     </Item>
   );
 };
