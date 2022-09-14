@@ -15,13 +15,10 @@ const Item = styled(Paper)(({ theme }) => ({
 const ParkingSlot = ({
   parkingSlotList,
   setParkingSlotList,
-  setType,
   show,
   setShowFinalPage,
-  inputEnable,
 }) => {
   const [parkingSlotInput, setParkingSlotInput] = useState();
-  const [inputDisabled, setInputDisabled] = useState(false);
 
   const inputChangeHandler = (e) => {
     setParkingSlotInput(e.target.value);
@@ -32,20 +29,14 @@ const ParkingSlot = ({
   );
   const ParkingInputSubmitHandler = (e) => {
     e.preventDefault();
-    setInputDisabled(true);
 
     setParkingSlotList(
       [...parkingSlotList, "P: " + parkingSlotInput].reverse()
     );
     setParkingSlotInput("");
-    // setType(3);
     setShowFinalPage(true);
   };
-  // const inputFieldHandler=inputEnable
   const checkParkingInput = checkParkingValue?.includes(1);
-  const checkInputSpacing =
-    parkingSlotInput && parkingSlotInput?.includes(" ") ? true : false;
-  const startBtnHandler = parkingSlotInput?.length > 2 ? false : true;
   return (
     <Item>
       <Typography variant="heading" className={classes.heading}>
@@ -55,66 +46,60 @@ const ParkingSlot = ({
       <br />
       <ParkingSlotDetails parkingSlotList={parkingSlotList} />
       <Box component="form" noValidate autoComplete="off">
-        {show != true ? (
-          <>
-            <TextField
-              sx={{
-                mt: 3,
-                ml: 0,
-                width: "5ch",
-              }}
-              size="small"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">P: </InputAdornment>
-                ),
-              }}
-            />{" "}
-            <TextField
-              sx={{
-                mt: 3,
-                ml: 0,
-                width: "25ch",
-              }}
-              size="small"
-              error={checkParkingValue?.includes(1) ? true : false}
-              label={
-                checkParkingValue?.includes(1) ? (
-                  <div className={classes.inter_font}>
-                    {ParkingSlotContent[1]}
-                  </div>
-                ) : (
-                  <div className={classes.inter_font}>
-                    {ParkingSlotContent[2]}
-                  </div>
-                )
-              }
-              type="text"
-              value={parkingSlotInput}
-              helperText={
-                checkParkingValue?.includes(1) ? ParkingSlotContent[3] : ""
-              }
-              onChange={inputChangeHandler}
-              disabled={inputDisabled || inputEnable}
-              data-testid="text-field"
-            />
-            <Button
-              sx={{ mt: 3, ml: 1, width: "12ch" }}
-              type={ParkingSlotContent[4]}
-              disabled={
-                checkParkingInput || checkInputSpacing || startBtnHandler
-              }
-              onClick={ParkingInputSubmitHandler}
-              variant="contained"
-              size="small"
-              data-testid={ParkingSlotContent[5]}
-            >
-              <div className={classes.save_btn}>{ParkingSlotContent[4]}</div>
-            </Button>
-          </>
-        ) : (
-          ""
-        )}
+    
+          <TextField
+            sx={{
+              mt: 3,
+              ml: 0,
+              width: "5ch",
+            }}
+            size="small"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">P: </InputAdornment>
+              ),
+            }}
+          />{" "}
+          <TextField
+            sx={{
+              mt: 3,
+              ml: 0,
+              width: "25ch",
+            }}
+            size="small"
+            error={checkParkingValue?.includes(1) ? true : false}
+            label={
+              checkParkingValue?.includes(1) ? (
+                <div className={classes.inter_font}>
+                  {ParkingSlotContent[1]}
+                </div>
+              ) : (
+                <div className={classes.inter_font}>
+                  {ParkingSlotContent[2]}
+                </div>
+              )
+            }
+            type="text"
+            value={parkingSlotInput}
+            helperText={
+              checkParkingValue?.includes(1) ? ParkingSlotContent[3] : ""
+            }
+            onChange={inputChangeHandler}
+            disabled={show}
+            data-testid="text-field"
+          />
+          <Button
+            sx={{ mt: 3, ml: 1, width: "12ch" }}
+            type={ParkingSlotContent[4]}
+            disabled={checkParkingInput || show}
+            onClick={ParkingInputSubmitHandler}
+            variant="contained"
+            size="small"
+            data-testid={ParkingSlotContent[5]}
+          >
+            <div className={classes.save_btn}>{ParkingSlotContent[4]}</div>
+          </Button>
+      
       </Box>
     </Item>
   );

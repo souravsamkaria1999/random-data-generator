@@ -9,10 +9,9 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(5),
   margin: theme.spacing(1),
 }));
-const Alotted = ({ SlotsHandler, updatedValue, setShow, showFinalPage }) => {
+const Alotted = ({ SlotsHandler, updatedValue }) => {
   const [disabled, setDisabled] = React.useState(false);
   const slotHandler = () => {
-    setShow(true);
     SlotsHandler();
     setDisabled(true);
   };
@@ -42,28 +41,18 @@ const Alotted = ({ SlotsHandler, updatedValue, setShow, showFinalPage }) => {
       <Typography variant="scrolling_box" className={classes.scrolling_box}>
         {data}
       </Typography>
-      <Box
-        data-testid={AlottedSlotContent[2]}
-        component="form"
-        noValidate
-        autoComplete="off"
-      >
+      <Box data-testid={AlottedSlotContent[2]}>
         <center>
-          {" "}
-          {showFinalPage == true ? (
-            <Button
-              sx={{ mt: 6, ml: 4, width: "13ch" }}
-              type={AlottedSlotContent[1]}
-              disabled={disabled}
-              onClick={slotHandler}
-              style={{ marginLeft: "10px" }}
-              variant="contained"
-            >
-              <div className={classes.save_btn}> {AlottedSlotContent[1]}</div>
-            </Button>
-          ) : (
-            ""
-          )}
+          <Button
+            sx={{ mt: 6, ml: 4, width: "23ch" }}
+            type={AlottedSlotContent[1]}
+            disabled={disabled}
+            onClick={slotHandler}
+            style={{ marginLeft: "10px" }}
+            variant="contained"
+          >
+            <div className={classes.save_btn}> {AlottedSlotContent[1]}</div>
+          </Button>
         </center>
       </Box>
     </Item>
