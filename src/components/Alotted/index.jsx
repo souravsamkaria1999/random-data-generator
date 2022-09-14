@@ -1,92 +1,72 @@
-import React, { useState } from "react";
+import React from "react";
+import { styled } from "@mui/material/styles";
 import classes from "./index.module.css";
-
-const getParkingData = () => {
-  let list = localStorage.getItem("Parking-slot-list");
-  if (list) {
-    return JSON.parse(list);
-  } else {
-    return [];
-  }
-};
-const getFlatData = () => {
-  let list = localStorage.getItem("Flat list");
-  if (list) {
-    return JSON.parse(list);
-  } else {
-    return [];
-  }
-};
-
-const getAlottedData = () => {
-  let list = localStorage.getItem("Alotted-slot-list");
-  if (list) {
-    return JSON.parse(list);
-  } else {
-    return [];
-  }
-};
-const Alotted = () => {
-  const [parkingSlotList, setParkingSlotList] = useState(getParkingData());
-  const [flatSlotList, setFlatSlotList] = useState(getFlatData(),getAlottedData());
-
-  var flatRandomValue = flatSlotList[~~(Math.random() * flatSlotList.length)];
-
-  var ParkingRandomValue =
-    parkingSlotList[~~(Math.random() * parkingSlotList.length)];
-
-  const [flatRandomNumber, setFlatRandomNumber] = useState();
-  const [ParkingRandomNumber, setParkingRandomNumber] = useState();
-
-  const SlotsHandler = () => {
-    setFlatRandomNumber(flatRandomValue);
-    setParkingRandomNumber(ParkingRandomValue);
+import Paper from "@mui/material/Paper";
+import { Box, Button, Typography } from "@mui/material";
+import { AlottedSlotContent } from "../../Content";
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#F0F8FD",
+  padding: theme.spacing(5),
+  margin: theme.spacing(1),
+}));
+const Alotted = ({ SlotsHandler, updatedValue, setShow, showFinalPage }) => {
+  const [disabled, setDisabled] = React.useState(false);
+  const slotHandler = () => {
+    setShow(true);
+    SlotsHandler();
+    setDisabled(true);
   };
-  React.useEffect(() => {
-    localStorage.setItem("Alotted-slot-list", JSON.stringify(flatSlotList));
-  }, [flatSlotList]);
+  const data = (
+    <Typography variant="container" className={classes.container}>
+      {updatedValue?.length > 0 ? (
+        <Typography variant="outer_box" className={classes.outer_box}>
+          <Typography variant="title" className={classes.title}>
+            {updatedValue?.[0]}
+            <br />
+            {updatedValue?.[1]}
+          </Typography>
+        </Typography>
+      ) : (
+        ""
+      )}
+    </Typography>
+  );
   return (
-    <main style={{ marginTop: "43px", width: "350px" }}>
-      <center>
-        <div>Alotted Slot </div>
-      </center>
-
-      <div className={classes.box}>
-        {flatRandomNumber != undefined ? (
-          <p>
-            flatsSlot:
-            <b>
-              {flatRandomNumber == undefined ? "No data" : flatRandomNumber}
-            </b>
-          </p>
-        ) : (
-          ""
-        )}
-        {flatRandomNumber != undefined ? (
-          <p>
-            ParkingSlot:
-            <b>
-              {ParkingRandomNumber == undefined
-                ? ParkingRandomNumber
-                : ParkingRandomNumber}
-            </b>
-          </p>
-        ) : (
-          ""
-        )}
-      </div>
+    <Item>
+      <Typography variant="heading" className={classes.heading}>
+        {AlottedSlotContent[0]}
+      </Typography>
+      <hr />
       <br />
-      <center>
-        {" "}
-        <button
-          typeof="button"
-          onClick={SlotsHandler}
-          style={{ marginLeft: "10px" }}
-        >
-          get a random data
-        </button>
-      </center>
-    </main>
+
+      <Typography variant="scrolling_box" className={classes.scrolling_box}>
+        {data}
+      </Typography>
+      <Box
+        data-testid={AlottedSlotContent[2]}
+        component="form"
+        noValidate
+        autoComplete="off"
+      >
+        <center>
+          {" "}
+          {showFinalPage == true ? (
+            <Button
+              sx={{ mt: 6, ml: 4, width: "13ch" }}
+              type={AlottedSlotContent[1]}
+              disabled={disabled}
+              onClick={slotHandler}
+              style={{ marginLeft: "10px" }}
+              variant="contained"
+            >
+              <div className={classes.save_btn}> {AlottedSlotContent[1]}</div>
+            </Button>
+          ) : (
+            ""
+          )}
+        </center>
+      </Box>
+    </Item>
   );
 };
 
