@@ -25,7 +25,7 @@ const FlatSlot = ({
     setFlatSlotInput(e.target.value);
   };
 
-  const checkflatValue = flatSlotList.map((item) =>
+  const checkflatValue = flatSlotList?.map((item) =>
     item == flatSlotInput ? 1 : 0
   );
   const FlatInputSubmitHandler = (e) => {
@@ -34,9 +34,9 @@ const FlatSlot = ({
     setFlatSlotInput("");
     setType(2);
   };
-  const checkflatInput = checkflatValue.includes(1);
+  const checkflatInput = checkflatValue?.includes(1);
   const checkInputSpacing =
-    flatSlotInput && flatSlotInput.includes(" ") ? true : false;
+    flatSlotInput && flatSlotInput?.includes(" ") ? true : false;
   const startBtnHandler = flatSlotInput?.length > 2 ? false : true;
   return (
     <Item>
@@ -57,25 +57,27 @@ const FlatSlot = ({
                 ml: 0,
                 width: "25ch",
               }}
-              size="small"
-              error={checkflatValue.includes(1) ? true : false}
+              size={FlatSlotContent[6]}
+              error={checkflatValue?.includes(1) ? true : false}
               label={
-                checkflatValue.includes(1)
+                checkflatValue?.includes(1)
                   ? FlatSlotContent[1]
                   : FlatSlotContent[2]
               }
               type="text"
               value={flatSlotInput}
-              helperText={checkflatValue.includes(1) ? FlatSlotContent[3] : ""}
+              helperText={checkflatValue?.includes(1) ? FlatSlotContent[3] : ""}
               onChange={inputChangeHandler}
+              data-testid="text-field"
             />
             <Button
               sx={{ mt: 3, ml: 1, p: 1, width: "12ch" }}
               type={FlatSlotContent[4]}
               disabled={checkflatInput || checkInputSpacing || startBtnHandler}
               onClick={FlatInputSubmitHandler}
-              variant="contained"
-              size="small"
+              variant={FlatSlotContent[7]}
+              data-testid={FlatSlotContent[5]}
+              size={FlatSlotContent[6]}
             >
               <Typography> {FlatSlotContent[4]}</Typography>
             </Button>

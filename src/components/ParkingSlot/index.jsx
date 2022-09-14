@@ -25,12 +25,11 @@ const ParkingSlot = ({
     setParkingSlotInput(e.target.value);
   };
 
-  const checkParkingValue = parkingSlotList.map((item) =>
+  const checkParkingValue = parkingSlotList?.map((item) =>
     item == "P: " + parkingSlotInput ? 1 : 0
   );
   const ParkingInputSubmitHandler = (e) => {
     e.preventDefault();
-    
 
     setParkingSlotList(
       [...parkingSlotList, "P: " + parkingSlotInput].reverse()
@@ -39,9 +38,9 @@ const ParkingSlot = ({
     // setType(3);
     setShowFinalPage(true);
   };
-  const checkParkingInput = checkParkingValue.includes(1);
+  const checkParkingInput = checkParkingValue?.includes(1);
   const checkInputSpacing =
-    parkingSlotInput && parkingSlotInput.includes(" ") ? true : false;
+    parkingSlotInput && parkingSlotInput?.includes(" ") ? true : false;
   const startBtnHandler = parkingSlotInput?.length > 2 ? false : true;
   return (
     <Item>
@@ -61,18 +60,19 @@ const ParkingSlot = ({
                 width: "25ch",
               }}
               size="small"
-              error={checkParkingValue.includes(1) ? true : false}
+              error={checkParkingValue?.includes(1) ? true : false}
               label={
-                checkParkingValue.includes(1)
+                checkParkingValue?.includes(1)
                   ? ParkingSlotContent[1]
                   : ParkingSlotContent[2]
               }
               type="text"
               value={parkingSlotInput}
               helperText={
-                checkParkingValue.includes(1) ? ParkingSlotContent[3] : ""
+                checkParkingValue?.includes(1) ? ParkingSlotContent[3] : ""
               }
               onChange={inputChangeHandler}
+              data-testid="text-field"
             />
             <Button
               sx={{ mt: 3, ml: 1, p: 1, width: "12ch" }}
@@ -83,6 +83,7 @@ const ParkingSlot = ({
               onClick={ParkingInputSubmitHandler}
               variant="contained"
               size="small"
+              data-testid={ParkingSlotContent[5]}
             >
               <Typography> {ParkingSlotContent[4]}</Typography>
             </Button>
