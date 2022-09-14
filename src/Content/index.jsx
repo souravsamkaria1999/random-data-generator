@@ -20,6 +20,6 @@ export const ParkingSlotContent = [
 ];
 export const AlottedSlotContent = [
   "Alotted Slot",
-  "Show",
+  "Save Allocation",
   "show-alotted-value",
 ];
