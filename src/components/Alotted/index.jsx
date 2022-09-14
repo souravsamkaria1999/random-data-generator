@@ -33,14 +33,21 @@ const Alotted = ({ SlotsHandler, updatedValue, setShow, showFinalPage }) => {
   );
   return (
     <Item>
-      <Typography variant="heading"   className={classes.heading}>
+      <Typography variant="heading" className={classes.heading}>
         {AlottedSlotContent[0]}
       </Typography>
       <hr />
+      <br />
+
       <Typography variant="scrolling_box" className={classes.scrolling_box}>
         {data}
       </Typography>
-      <Box  data-testid={AlottedSlotContent[2]} component="form" noValidate autoComplete="off">
+      <Box
+        data-testid={AlottedSlotContent[2]}
+        component="form"
+        noValidate
+        autoComplete="off"
+      >
         <center>
           {" "}
           {showFinalPage == true ? (
@@ -51,9 +58,8 @@ const Alotted = ({ SlotsHandler, updatedValue, setShow, showFinalPage }) => {
               onClick={slotHandler}
               style={{ marginLeft: "10px" }}
               variant="contained"
-             
             >
-              {AlottedSlotContent[1]}
+              <div className={classes.save_btn}> {AlottedSlotContent[1]}</div>
             </Button>
           ) : (
             ""

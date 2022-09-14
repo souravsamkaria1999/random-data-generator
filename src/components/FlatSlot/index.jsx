@@ -11,16 +11,16 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(5),
   margin: theme.spacing(1),
 }));
-
 const FlatSlot = ({
   flatSlotList,
   setFlatSlotList,
   getFlatData,
   setType,
+  setInputEnable,
   show,
 }) => {
   const [flatSlotInput, setFlatSlotInput] = useState();
-
+  const [inputDisabled, setInputDisabled] = useState(false);
   const inputChangeHandler = (e) => {
     setFlatSlotInput(e.target.value);
   };
@@ -29,6 +29,8 @@ const FlatSlot = ({
     item == flatSlotInput ? 1 : 0
   );
   const FlatInputSubmitHandler = (e) => {
+    setInputEnable(false);
+    setInputDisabled(true);
     e.preventDefault();
     setFlatSlotList([...flatSlotList, flatSlotInput].reverse());
     setFlatSlotInput("");
@@ -38,15 +40,16 @@ const FlatSlot = ({
   const checkInputSpacing =
     flatSlotInput && flatSlotInput?.includes(" ") ? true : false;
   const startBtnHandler = flatSlotInput?.length > 2 ? false : true;
+
   return (
-    <Item>
+    <Item className={classes.backgroundColor}>
       <Typography variant="heading" className={classes.heading}>
         {FlatSlotContent[0]}
       </Typography>
       <hr />
       <br />
       <FlatSlotInfo flatSlotList={flatSlotList} />
-      <Box component="form" noValidate autoComplete="off">
+      <Box>
         {show != true ? (
           <>
             {" "}
@@ -60,18 +63,27 @@ const FlatSlot = ({
               size={FlatSlotContent[6]}
               error={checkflatValue?.includes(1) ? true : false}
               label={
-                checkflatValue?.includes(1)
-                  ? FlatSlotContent[1]
-                  : FlatSlotContent[2]
+                checkflatValue?.includes(1) ? (
+                  <div className={classes.inter_font}>{FlatSlotContent[1]}</div>
+                ) : (
+                  <div className={classes.inter_font}>{FlatSlotContent[2]}</div>
+                )
               }
               type="text"
               value={flatSlotInput}
-              helperText={checkflatValue?.includes(1) ? FlatSlotContent[3] : ""}
+              helperText={
+                checkflatValue?.includes(1) ? (
+                  <div className={classes.inter_font}>{FlatSlotContent[3]}</div>
+                ) : (
+                  ""
+                )
+              }
               onChange={inputChangeHandler}
+              disabled={inputDisabled}
               data-testid="text-field"
             />
             <Button
-              sx={{ mt: 3, ml: 1, p: 1, width: "12ch" }}
+              sx={{ mt: 3, ml: 1, width: "12ch" }}
               type={FlatSlotContent[4]}
               disabled={checkflatInput || checkInputSpacing || startBtnHandler}
               onClick={FlatInputSubmitHandler}
@@ -79,13 +91,14 @@ const FlatSlot = ({
               data-testid={FlatSlotContent[5]}
               size={FlatSlotContent[6]}
             >
-              <Typography> {FlatSlotContent[4]}</Typography>
+              <div className={classes.save_btn}>{FlatSlotContent[4]}</div>
             </Button>
           </>
         ) : (
           ""
         )}
       </Box>
+      {/* {inputDisabled == true ?  <Typography className={classes.message}>{FlatSlotContent[8]}</Typography> : ""} */}
       {/* <p>{checkflatValue.includes(1) ? "not available" : ""}</p> */}
     </Item>
   );

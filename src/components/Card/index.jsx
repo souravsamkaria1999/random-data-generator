@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Alotted from "../Alotted/index";
 import { styled } from "@mui/material/styles";
-
 import FlatSlot from "../FlatSlot/index";
 import ParkingSlot from "../ParkingSlot/index";
 import Box from "@mui/material/Box";
@@ -45,6 +44,7 @@ const getAlottedData = () => {
 const Card = () => {
   const [flatSlotList, setFlatSlotList] = useState(getFlatData());
   const [parkingSlotList, setParkingSlotList] = useState(getParkingData());
+  const [inputEnable, setInputEnable] = useState(true);
   // const [type, setType] = useState(1);
   var flatRandomValue = flatSlotList[~~(Math.random() * flatSlotList.length)];
 
@@ -71,7 +71,6 @@ const Card = () => {
     localStorage.removeItem("flatFinalValue");
     localStorage.removeItem("parkingFinalValue");
   }, [flatFinalValue, parkingFinalValue, flatSlotList, parkingSlotList]);
-  // console.log(parkingSlotList)
   return (
     <>
       <Box>
@@ -83,6 +82,7 @@ const Card = () => {
               setFlatSlotList={setFlatSlotList}
               getFlatData={getFlatData}
               show={show}
+              setInputEnable={setInputEnable}
               // setType={setType}
             />
           </Grid>
@@ -95,6 +95,7 @@ const Card = () => {
               getParkingData={getParkingData}
               show={show}
               setShowFinalPage={setShowFinalPage}
+              inputEnable={inputEnable}
               // setType={setType}
             />
           </Grid>

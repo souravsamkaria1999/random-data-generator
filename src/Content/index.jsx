@@ -3,18 +3,23 @@ export const FlatSlotContent = [
   "Not available ",
   "Enter the value",
   "Value already exists",
-  "submit",
+  "Submit",
   "save-flat-value",
   "small",
-  "contained"
+  "contained",
+  "Enter the parking slot",
 ];
 
 export const ParkingSlotContent = [
   "Parking Slot",
   "Not available ",
-  " P:",
+  "Enter the value",
   "Value already exists",
-  "submit",
+  "Submit",
   "save-parking-value",
 ];
-export const AlottedSlotContent = ["Alotted Slot", "Show", "show-alotted-value"];
+export const AlottedSlotContent = [
+  "Alotted Slot",
+  "Show",
+  "show-alotted-value",
+];

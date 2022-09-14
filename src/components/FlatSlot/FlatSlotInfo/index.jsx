@@ -7,8 +7,7 @@ const FlatSlotInfo = ({ flatSlotList }) => {
       <Typography variant="container" className={classes.container}>
         <Typography variant="outer_box" className={classes.outer_box}>
           <Typography variant="title" className={classes.title}>
-            {" "}
-            {value}{" "}
+            {value}
           </Typography>
         </Typography>
       </Typography>

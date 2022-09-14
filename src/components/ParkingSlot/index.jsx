@@ -5,7 +5,7 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, InputAdornment, Typography } from "@mui/material";
 import { ParkingSlotContent } from "../../Content";
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#828382" : "#F0F8FD",
@@ -18,8 +18,10 @@ const ParkingSlot = ({
   setType,
   show,
   setShowFinalPage,
+  inputEnable,
 }) => {
   const [parkingSlotInput, setParkingSlotInput] = useState();
+  const [inputDisabled, setInputDisabled] = useState(false);
 
   const inputChangeHandler = (e) => {
     setParkingSlotInput(e.target.value);
@@ -30,6 +32,7 @@ const ParkingSlot = ({
   );
   const ParkingInputSubmitHandler = (e) => {
     e.preventDefault();
+    setInputDisabled(true);
 
     setParkingSlotList(
       [...parkingSlotList, "P: " + parkingSlotInput].reverse()
@@ -38,6 +41,7 @@ const ParkingSlot = ({
     // setType(3);
     setShowFinalPage(true);
   };
+  // const inputFieldHandler=inputEnable
   const checkParkingInput = checkParkingValue?.includes(1);
   const checkInputSpacing =
     parkingSlotInput && parkingSlotInput?.includes(" ") ? true : false;
@@ -57,14 +61,33 @@ const ParkingSlot = ({
               sx={{
                 mt: 3,
                 ml: 0,
+                width: "5ch",
+              }}
+              size="small"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">P: </InputAdornment>
+                ),
+              }}
+            />{" "}
+            <TextField
+              sx={{
+                mt: 3,
+                ml: 0,
                 width: "25ch",
               }}
               size="small"
               error={checkParkingValue?.includes(1) ? true : false}
               label={
-                checkParkingValue?.includes(1)
-                  ? ParkingSlotContent[1]
-                  : ParkingSlotContent[2]
+                checkParkingValue?.includes(1) ? (
+                  <div className={classes.inter_font}>
+                    {ParkingSlotContent[1]}
+                  </div>
+                ) : (
+                  <div className={classes.inter_font}>
+                    {ParkingSlotContent[2]}
+                  </div>
+                )
               }
               type="text"
               value={parkingSlotInput}
@@ -72,10 +95,11 @@ const ParkingSlot = ({
                 checkParkingValue?.includes(1) ? ParkingSlotContent[3] : ""
               }
               onChange={inputChangeHandler}
+              disabled={inputDisabled || inputEnable}
               data-testid="text-field"
             />
             <Button
-              sx={{ mt: 3, ml: 1, p: 1, width: "12ch" }}
+              sx={{ mt: 3, ml: 1, width: "12ch" }}
               type={ParkingSlotContent[4]}
               disabled={
                 checkParkingInput || checkInputSpacing || startBtnHandler
@@ -85,7 +109,7 @@ const ParkingSlot = ({
               size="small"
               data-testid={ParkingSlotContent[5]}
             >
-              <Typography> {ParkingSlotContent[4]}</Typography>
+              <div className={classes.save_btn}>{ParkingSlotContent[4]}</div>
             </Button>
           </>
         ) : (

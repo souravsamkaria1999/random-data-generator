@@ -1,7 +1,17 @@
 .heading {
-  font-size: 34px;
-  font-weight: 600;
+  font-size: 30px;
+  font-weight: 500;
   padding-bottom: 90px;
   color: rgb(0, 0, 0);
-  font-family: "Montserrat";
+  font-family: "Inter", sans-serif;
 }
+
+.inter_font {
+  font-family: "Inter", sans-serif;
+}
+.save_btn {
+  font-family: "Inter", sans-serif;
+  font-size: 17px;
+  text-transform: none;
+}
+
