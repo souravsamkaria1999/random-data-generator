@@ -2,13 +2,15 @@ export const FlatSlotContent = [
   "FlatSlot",
   "Not available ",
   "Enter the value",
+  "Value already exists",
   "submit",
 ];
 
 export const ParkingSlotContent = [
   "Parking Slot",
   "Not available ",
-  "Enter the value",
+  " P:",
+  "Value already exists",
   "submit",
 ];
-export const AlottedSlotContent = ["Alotted Slot", "Save"];
+export const AlottedSlotContent = ["Alotted Slot", "Show"];

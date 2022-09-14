@@ -9,9 +9,10 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(5),
   margin: theme.spacing(1),
 }));
-const Alotted = ({ SlotsHandler, updatedValue }) => {
+const Alotted = ({ SlotsHandler, updatedValue, setShow, showFinalPage }) => {
   const [disabled, setDisabled] = React.useState(false);
   const slotHandler = () => {
+    setShow(true);
     SlotsHandler();
     setDisabled(true);
   };
@@ -42,16 +43,20 @@ const Alotted = ({ SlotsHandler, updatedValue }) => {
       <Box component="form" noValidate autoComplete="off">
         <center>
           {" "}
-          <Button
-            sx={{ mt: 6, ml: 4, width: "13ch" }}
-            type={AlottedSlotContent[1]}
-            disabled={disabled}
-            onClick={slotHandler}
-            style={{ marginLeft: "10px" }}
-            variant="contained"
-          >
-            {AlottedSlotContent[1]}
-          </Button>
+          {showFinalPage == true ? (
+            <Button
+              sx={{ mt: 6, ml: 4, width: "13ch" }}
+              type={AlottedSlotContent[1]}
+              disabled={disabled}
+              onClick={slotHandler}
+              style={{ marginLeft: "10px" }}
+              variant="contained"
+            >
+              {AlottedSlotContent[1]}
+            </Button>
+          ) : (
+            ""
+          )}
         </center>
       </Box>
     </Item>

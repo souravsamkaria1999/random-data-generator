@@ -7,6 +7,7 @@ import ParkingSlot from "../ParkingSlot/index";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -44,6 +45,7 @@ const getAlottedData = () => {
 const Card = () => {
   const [flatSlotList, setFlatSlotList] = useState(getFlatData());
   const [parkingSlotList, setParkingSlotList] = useState(getParkingData());
+  // const [type, setType] = useState(1);
   var flatRandomValue = flatSlotList[~~(Math.random() * flatSlotList.length)];
 
   var ParkingRandomValue =
@@ -59,6 +61,9 @@ const Card = () => {
   };
   const flatFinalValue = [updatedValue?.[0]];
   const parkingFinalValue = [updatedValue?.[1]];
+  const [show, setShow] = useState(false);
+  const [showFinalPage, setShowFinalPage] = useState(false);
+
   React.useEffect(() => {
     localStorage.setItem("Alotted-slot-list", JSON.stringify(updatedValue));
     localStorage.setItem("Flat list", JSON.stringify(flatSlotList));
@@ -66,27 +71,44 @@ const Card = () => {
     localStorage.removeItem("flatFinalValue");
     localStorage.removeItem("parkingFinalValue");
   }, [flatFinalValue, parkingFinalValue, flatSlotList, parkingSlotList]);
+  // console.log(parkingSlotList)
   return (
     <>
-      <Box >
+      <Box>
         <Grid container spacing={0}>
+          {/* {type === 1 && ( */}
           <Grid item xs={5} style={{ margin: "auto" }}>
             <FlatSlot
               flatSlotList={flatSlotList}
               setFlatSlotList={setFlatSlotList}
               getFlatData={getFlatData}
+              show={show}
+              // setType={setType}
             />
           </Grid>
+          {/* )} */}
+          {/* {type === 2 && ( */}
           <Grid item xs={5} style={{ margin: "auto" }}>
             <ParkingSlot
               parkingSlotList={parkingSlotList}
               setParkingSlotList={setParkingSlotList}
               getParkingData={getParkingData}
+              show={show}
+              setShowFinalPage={setShowFinalPage}
+              // setType={setType}
             />
           </Grid>
+          {/* )} */}
+          {/* {type === 3 && ( */}
           <Grid item xs={5} style={{ margin: "auto" }}>
-            <Alotted SlotsHandler={SlotsHandler} updatedValue={updatedValue} />
+            <Alotted
+              SlotsHandler={SlotsHandler}
+              updatedValue={updatedValue}
+              setShow={setShow}
+              showFinalPage={showFinalPage}
+            />
           </Grid>
+          {/* )} */}
         </Grid>
       </Box>
     </>

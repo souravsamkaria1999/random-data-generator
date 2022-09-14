@@ -12,7 +12,13 @@ const Item = styled(Paper)(({ theme }) => ({
   margin: theme.spacing(1),
 }));
 
-const FlatSlot = ({ flatSlotList, setFlatSlotList, getFlatData }) => {
+const FlatSlot = ({
+  flatSlotList,
+  setFlatSlotList,
+  getFlatData,
+  setType,
+  show,
+}) => {
   const [flatSlotInput, setFlatSlotInput] = useState();
 
   const inputChangeHandler = (e) => {
@@ -26,47 +32,57 @@ const FlatSlot = ({ flatSlotList, setFlatSlotList, getFlatData }) => {
     e.preventDefault();
     setFlatSlotList([...flatSlotList, flatSlotInput].reverse());
     setFlatSlotInput("");
+    setType(2);
   };
   const checkflatInput = checkflatValue.includes(1);
   const checkInputSpacing =
     flatSlotInput && flatSlotInput.includes(" ") ? true : false;
-  const startBtnHandler = flatSlotInput?.length > 3 ? false : true;
+  const startBtnHandler = flatSlotInput?.length > 2 ? false : true;
   return (
     <Item>
       <Typography variant="heading" className={classes.heading}>
         {FlatSlotContent[0]}
       </Typography>
       <hr />
-
+      <br />
       <FlatSlotInfo flatSlotList={flatSlotList} />
       <Box component="form" noValidate autoComplete="off">
-        <TextField
-          pattern="/^\S*$/"
-          sx={{
-            mt: 4,
-            ml: 0,
-            width: "25ch",
-          }}
-          size="medium"
-          error={checkflatValue.includes(1) ? true : false}
-          label={
-            checkflatValue.includes(1) ? FlatSlotContent[1] : FlatSlotContent[2]
-          }
-          type="text"
-          value={flatSlotInput}
-          helperText={checkflatValue.includes(1) ? "Value already exists" : ""}
-          onChange={inputChangeHandler}
-        />
-        <Button
-          sx={{ mt: 5, ml: 1, p: 1, width: "12ch" }}
-          type={FlatSlotContent[3]}
-          disabled={checkflatInput || checkInputSpacing || startBtnHandler}
-          onClick={FlatInputSubmitHandler}
-          variant="contained"
-        >
-          {" "}
-          {FlatSlotContent[3]}
-        </Button>
+        {show != true ? (
+          <>
+            {" "}
+            <TextField
+              pattern="/^\S*$/"
+              sx={{
+                mt: 3,
+                ml: 0,
+                width: "25ch",
+              }}
+              size="small"
+              error={checkflatValue.includes(1) ? true : false}
+              label={
+                checkflatValue.includes(1)
+                  ? FlatSlotContent[1]
+                  : FlatSlotContent[2]
+              }
+              type="text"
+              value={flatSlotInput}
+              helperText={checkflatValue.includes(1) ? FlatSlotContent[3] : ""}
+              onChange={inputChangeHandler}
+            />
+            <Button
+              sx={{ mt: 3, ml: 1, p: 1, width: "12ch" }}
+              type={FlatSlotContent[4]}
+              disabled={checkflatInput || checkInputSpacing || startBtnHandler}
+              onClick={FlatInputSubmitHandler}
+              variant="contained"
+              size="small"
+            >
+              <Typography> {FlatSlotContent[4]}</Typography>
+            </Button>
+          </>
+        ) : (
+          ""
+        )}
       </Box>
       {/* <p>{checkflatValue.includes(1) ? "not available" : ""}</p> */}
     </Item>
