@@ -37,6 +37,7 @@ const FlatSlot = ({ flatSlotList, setFlatSlotList, show }) => {
       <FlatSlotInfo flatSlotList={flatSlotList} />
       <Box>
         <TextField
+          // required="required"
           sx={{
             mt: 3,
             ml: 0,
@@ -68,7 +69,7 @@ const FlatSlot = ({ flatSlotList, setFlatSlotList, show }) => {
         <Button
           sx={{ mt: 3, ml: 1, width: "12ch" }}
           type={FlatSlotContent[4]}
-          disabled={checkflatInput || show}
+          disabled={checkflatInput || show || !flatSlotInput}
           onClick={FlatInputSubmitHandler}
           variant={FlatSlotContent[7]}
           data-testid={FlatSlotContent[5]}

@@ -7,6 +7,8 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import LockListing from "../LockListing";
+import ResetListing from "../ResetListing/index";
+import { Button } from "@mui/material";
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -33,7 +35,7 @@ const getParkingData = () => {
 };
 
 const getAlottedData = () => {
-  let list = localStorage.getItem("Alotted-slot-list2");
+  let list = localStorage.getItem("Alotted-slot-list");
   if (list) {
     return JSON.parse(list);
   } else {
@@ -50,7 +52,8 @@ const Card = () => {
     parkingSlotList[~~(Math.random() * parkingSlotList.length)];
   const [updatedValue, setUpdatedValue] = useState(getAlottedData());
   const SlotsHandler = () => {
-    setUpdatedValue([flatRandomValue, ParkingRandomValue]);
+    setUpdatedValue([...updatedValue, flatRandomValue, ParkingRandomValue]);
+
     const index = flatSlotList.indexOf(flatRandomValue);
     flatSlotList.splice(index, 1);
     const ParkingIndex = parkingSlotList.indexOf(ParkingRandomValue);
@@ -63,9 +66,25 @@ const Card = () => {
     localStorage.setItem("Alotted-slot-list", JSON.stringify(updatedValue));
     localStorage.setItem("Flat list", JSON.stringify(flatSlotList));
     localStorage.setItem("Parking-slot-list", JSON.stringify(parkingSlotList));
-    localStorage.removeItem("flatFinalValue");
-    localStorage.removeItem("parkingFinalValue");
-  }, [flatFinalValue, parkingFinalValue, flatSlotList, parkingSlotList]);
+  }, [
+    updatedValue,
+    flatFinalValue,
+    parkingFinalValue,
+    flatSlotList,
+    parkingSlotList,
+  ]);
+
+  const resetDataHandler = () => {
+    window.location.reload(false);
+    localStorage.removeItem("Alotted-slot-list", JSON.stringify(updatedValue));
+    localStorage.removeItem("Flat list", JSON.stringify(flatSlotList));
+    localStorage.removeItem(
+      "Parking-slot-list",
+      JSON.stringify(parkingSlotList)
+    );
+  };
+
+  const btnDisableEnableHandler = flatSlotList.length == parkingSlotList.length;
   return (
     <>
       <Box>
@@ -84,7 +103,6 @@ const Card = () => {
               show={show}
             />
           </Grid>
-          
 
           <Grid
             item
@@ -92,17 +110,26 @@ const Card = () => {
             style={{
               textAlign: "center",
             }}
-          >  
+          >
             <LockListing setShow={setShow} />
-            
-          <br />
-          <br />
+
+            <br />
+            <br />
           </Grid>
-         
           <Grid item xs={8} style={{ margin: "auto" }}>
-            <Alotted SlotsHandler={SlotsHandler} updatedValue={updatedValue} />
+            <Alotted
+              SlotsHandler={SlotsHandler}
+              updatedValue={updatedValue}
+              setUpdatedValue={setUpdatedValue}
+              btnDisableEnableHandler={btnDisableEnableHandler}
+              flatSlotList={flatSlotList}
+            />
           </Grid>
         </Grid>
+        <center>
+          {" "}
+          <ResetListing resetDataHandler={resetDataHandler} />
+        </center>
       </Box>
     </>
   );
