@@ -6,6 +6,7 @@ import FlatSlotInfo from "./FlatSlotInfo/index";
 import TextField from "@mui/material/TextField";
 import { Box, Button, Typography } from "@mui/material";
 import { FlatSlotContent } from "../../Content/index";
+import  Grid  from '@mui/material/Grid';
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#828382" : "#F0F8FD",
   padding: theme.spacing(5),
@@ -28,6 +29,7 @@ const FlatSlot = ({ flatSlotList, setFlatSlotList, show }) => {
   const checkflatInput = checkflatValue?.includes(1);
 
   return (
+    <Grid item xs={5} style={{ margin: "auto" }}>
     <Item className={classes.backgroundColor}>
       <Typography variant="heading" className={classes.heading}>
         {FlatSlotContent[0]}
@@ -63,7 +65,6 @@ const FlatSlot = ({ flatSlotList, setFlatSlotList, show }) => {
           }
           onChange={inputChangeHandler}
           disabled={show}
-          autoFocus="autofocus"
           data-testid="text-field"
         />
         <Button
@@ -79,6 +80,7 @@ const FlatSlot = ({ flatSlotList, setFlatSlotList, show }) => {
         </Button>
       </Box>
     </Item>
+    </Grid>
   );
 };
 

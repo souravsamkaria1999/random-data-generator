@@ -6,6 +6,7 @@ import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import { Box, Button, InputAdornment, Typography } from "@mui/material";
 import { ParkingSlotContent } from "../../Content";
+import  Grid  from '@mui/material/Grid';
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#828382" : "#F0F8FD",
   padding: theme.spacing(5),
@@ -31,6 +32,7 @@ const ParkingSlot = ({ parkingSlotList, setParkingSlotList, show }) => {
   };
   const checkParkingInput = checkParkingValue?.includes(1);
   return (
+    <Grid item xs={5} style={{ margin: "auto" }}>
     <Item>
       <Typography variant="heading" className={classes.heading}>
         {ParkingSlotContent[0]}
@@ -89,6 +91,8 @@ const ParkingSlot = ({ parkingSlotList, setParkingSlotList, show }) => {
         </Button>
       </Box>
     </Item>
+    </Grid>
+
   );
 };
 
