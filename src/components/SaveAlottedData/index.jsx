@@ -11,11 +11,7 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(5),
   margin: theme.spacing(1),
 }));
-const Alotted = ({ SlotsHandler, updatedValue }) => {
-  const slotHandler = () => {
-    SlotsHandler();
-  };
-
+const SaveAlottedData = ({ alottedDataSaveHandler, updatedValue }) => {
   const NewUser = updatedValue?.map((value, key) => {
     return (
       <Typography
@@ -49,7 +45,7 @@ const Alotted = ({ SlotsHandler, updatedValue }) => {
             <Button
               sx={{ mt: 6, ml: 4, width: "23ch" }}
               type={AlottedSlotContent[1]}
-              onClick={slotHandler}
+              onClick={alottedDataSaveHandler}
               style={{ marginLeft: "10px" }}
               variant="contained"
             >
@@ -62,4 +58,4 @@ const Alotted = ({ SlotsHandler, updatedValue }) => {
   );
 };
 
-export default Alotted;
+export default SaveAlottedData;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Alotted from "../Alotted/index";
+import Alotted from "../SaveAlottedData/index";
 import { styled } from "@mui/material/styles";
 import FlatSlot from "../FlatSlot/index";
 import ParkingSlot from "../ParkingSlot/index";
@@ -10,6 +10,7 @@ import LockListing from "../LockListing";
 import ResetListing from "../ResetListing/index";
 import SaveAllocationModal from "../Modals/SaveAllocationModal";
 import LockListingModal from "../Modals/LockListingModal";
+import AlotSlot from "../AlotSlot";
 const getFlatData = () => {
   let list = localStorage.getItem("Flat list");
   if (list) {
@@ -63,16 +64,17 @@ const Card = () => {
   const flatFinalValue = [updatedValue?.[0]];
   const parkingFinalValue = [updatedValue?.[1]];
   React.useEffect(() => {
-    localStorage.setItem("Alotted-slot-list", JSON.stringify(updatedValue));
     localStorage.setItem("Flat list", JSON.stringify(flatSlotList));
     localStorage.setItem("Parking-slot-list", JSON.stringify(parkingSlotList));
-  }, [
-    updatedValue,
-    flatFinalValue,
-    parkingFinalValue,
-    flatSlotList,
-    parkingSlotList,
-  ]);
+  }, [flatFinalValue, parkingFinalValue, flatSlotList, parkingSlotList]);
+  const alottedDataSaveHandler = () => {
+    if (updatedValue.length > 0) {
+      localStorage.setItem("Alotted-slot-list", JSON.stringify(updatedValue));
+    } else {
+      handleOpen();
+      setType(1);
+    }
+  };
   const resetDataHandler = () => {
     window.location.reload(false);
     localStorage.removeItem("Alotted-slot-list", JSON.stringify(updatedValue));
@@ -96,13 +98,22 @@ const Card = () => {
             setParkingSlotList={setParkingSlotList}
             show={show}
           />
-          <LockListing
-            handleOpen={handleOpen}
-            setType={setType}
-            flatSlotList={flatSlotList}
-            setShow={setShow}
+
+          <Grid container spacing={0}>
+            <LockListing
+              handleOpen={handleOpen}
+              setType={setType}
+              flatSlotList={flatSlotList}
+              setShow={setShow}
+            />
+
+            <AlotSlot SlotsHandler={SlotsHandler} />
+          </Grid>
+
+          <Alotted
+            alottedDataSaveHandler={alottedDataSaveHandler}
+            updatedValue={updatedValue}
           />
-          <Alotted SlotsHandler={SlotsHandler} updatedValue={updatedValue} />
         </Grid>
         <ResetListing resetDataHandler={resetDataHandler} />
         {type == 1 && (

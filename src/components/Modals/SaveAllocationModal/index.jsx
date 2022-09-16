@@ -2,6 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Modal } from "@mui/material";
+import { SaveAllocationModalContent } from "../../../Content";
 
 const style = {
   position: "absolute",
@@ -31,7 +32,7 @@ const SaveAllocationModal = ({ open, handleClose }) => {
             component="h2"
             style={{ textAlign: "center", color: "#1976d2" }}
           >
-            Warning:
+          {SaveAllocationModalContent[0]}
           </Typography>
           <Typography
             id="modal-modal-description"
@@ -44,7 +45,7 @@ const SaveAllocationModal = ({ open, handleClose }) => {
               margin: "auto",
             }}
           >
-           No slot available
+           {SaveAllocationModalContent[1]}
           </Typography>
         </Box>
       </Modal>

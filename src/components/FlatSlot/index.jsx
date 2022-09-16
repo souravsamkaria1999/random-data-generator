@@ -36,7 +36,7 @@ const FlatSlot = ({ flatSlotList, setFlatSlotList, show }) => {
         <hr />
         <br />
         <FlatSlotInfo flatSlotList={flatSlotList} />
-        <Box>
+        <Box component="form" noValidate autoComplete="off">
           <TextField
             sx={{
               mt: 3,
@@ -68,8 +68,8 @@ const FlatSlot = ({ flatSlotList, setFlatSlotList, show }) => {
           <Button
             sx={{ mt: 3, ml: 1, width: "12ch" }}
             type={FlatSlotContent[4]}
-            disabled={checkflatInput || show || !flatSlotInput}
             onClick={FlatInputSubmitHandler}
+            disabled={checkflatInput || show || !flatSlotInput}
             variant={FlatSlotContent[7]}
             data-testid={FlatSlotContent[5]}
             size={FlatSlotContent[6]}

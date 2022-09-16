@@ -1,7 +1,7 @@
 import { Button, Grid } from "@mui/material";
 import React from "react";
 import { LockListingContent } from "../../Content";
-import classes from './index.module.css'
+import classes from "./index.module.css";
 const LockListing = ({ handleOpen, setType, flatSlotList, setShow }) => {
   const BtnHandler = () => {
     if (flatSlotList?.length > 0) {
@@ -14,9 +14,9 @@ const LockListing = ({ handleOpen, setType, flatSlotList, setShow }) => {
   return (
     <Grid
       item
-      xs={12}
+      xs={6}
       style={{
-        textAlign: "center",
+        textAlign: "right",
       }}
     >
       <Button
@@ -24,8 +24,8 @@ const LockListing = ({ handleOpen, setType, flatSlotList, setShow }) => {
         variant="contained"
         onClick={BtnHandler}
       >
-       <div className={classes.lock_btn}> {LockListingContent[0]}
-       </div> </Button>
+        <div className={classes.lock_btn}> {LockListingContent[0]}</div>{" "}
+      </Button>
       <br />
       <br />
     </Grid>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@mui/material";
 import { ResetListingContent } from "../../Content";
+import classes from "./index.module.css";
 const ResetListing = ({ resetDataHandler }) => {
   return (
     <center>
@@ -9,7 +10,7 @@ const ResetListing = ({ resetDataHandler }) => {
         variant="contained"
         onClick={resetDataHandler}
       >
-        {ResetListingContent[0]}
+        <div className={classes.save_btn}> {ResetListingContent[0]}</div>
       </Button>
     </center>
   );
