@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Modal } from "@mui/material";
 import { LockListingModalContent } from "../../../Content/index";
-
 const style = {
   position: "absolute",
   top: "50%",
@@ -15,7 +14,6 @@ const style = {
   borderRadius: 1,
   pt: 3,
 };
-
 const LockListingModal = ({ open, handleClose }) => {
   return (
     <div>
