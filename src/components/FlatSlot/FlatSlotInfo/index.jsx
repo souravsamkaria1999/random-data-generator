@@ -14,9 +14,9 @@ const FlatSlotInfo = ({ flatSlotList }) => {
     );
   });
   return (
-    <Typography variant="scrolling_box" className={classes.scrolling_box}>
+    <div variant="scrolling_box" className={classes.scrolling_box}>
       {NewUser}
-    </Typography>
+    </div>
   );
 };
 

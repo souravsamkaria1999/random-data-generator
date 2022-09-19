@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Alotted from "../Alotted/index";
 import { styled } from "@mui/material/styles";
 import FlatSlot from "../FlatSlot/index";
 import ParkingSlot from "../ParkingSlot/index";
@@ -7,13 +6,11 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import LockListing from "../LockListing";
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
+import ResetListing from "../ResetListing/index";
+import SaveAllocationModal from "../Modals/SaveAllocationModal";
+import LockListingModal from "../Modals/LockListingModal";
+import AlotSlot from "../AlotSlot";
+import SaveAlottedData from "../SaveAlottedData/index";
 const getFlatData = () => {
   let list = localStorage.getItem("Flat list");
   if (list) {
@@ -33,14 +30,13 @@ const getParkingData = () => {
 };
 
 const getAlottedData = () => {
-  let list = localStorage.getItem("Alotted-slot-list2");
+  let list = localStorage.getItem("Alotted-slot-list");
   if (list) {
     return JSON.parse(list);
   } else {
     return [];
   }
 };
-
 const Card = () => {
   const [flatSlotList, setFlatSlotList] = useState(getFlatData());
   const [parkingSlotList, setParkingSlotList] = useState(getParkingData());
@@ -49,60 +45,86 @@ const Card = () => {
   var ParkingRandomValue =
     parkingSlotList[~~(Math.random() * parkingSlotList.length)];
   const [updatedValue, setUpdatedValue] = useState(getAlottedData());
+  const [type, setType] = useState(0);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const SlotsHandler = () => {
-    setUpdatedValue([flatRandomValue, ParkingRandomValue]);
-    const index = flatSlotList.indexOf(flatRandomValue);
-    flatSlotList.splice(index, 1);
-    const ParkingIndex = parkingSlotList.indexOf(ParkingRandomValue);
-    parkingSlotList.splice(ParkingIndex, 1);
+    if (flatRandomValue && ParkingRandomValue != undefined) {
+      setUpdatedValue([...updatedValue, flatRandomValue, ParkingRandomValue]);
+      const index = flatSlotList.indexOf(flatRandomValue);
+      flatSlotList.splice(index, 1);
+      const ParkingIndex = parkingSlotList.indexOf(ParkingRandomValue);
+      parkingSlotList.splice(ParkingIndex, 1);
+    } else {
+      handleOpen();
+      setType(1);
+    }
   };
   const flatFinalValue = [updatedValue?.[0]];
   const parkingFinalValue = [updatedValue?.[1]];
-
   React.useEffect(() => {
-    localStorage.setItem("Alotted-slot-list", JSON.stringify(updatedValue));
     localStorage.setItem("Flat list", JSON.stringify(flatSlotList));
     localStorage.setItem("Parking-slot-list", JSON.stringify(parkingSlotList));
-    localStorage.removeItem("flatFinalValue");
-    localStorage.removeItem("parkingFinalValue");
   }, [flatFinalValue, parkingFinalValue, flatSlotList, parkingSlotList]);
+  const alottedDataSaveHandler = () => {
+    if (updatedValue.length > 0) {
+      localStorage.setItem("Alotted-slot-list", JSON.stringify(updatedValue));
+    } else {
+      handleOpen();
+      setType(1);
+    }
+  };
+  const resetDataHandler = () => {
+    window.location.reload(false);
+    localStorage.removeItem("Alotted-slot-list", JSON.stringify(updatedValue));
+    localStorage.removeItem("Flat list", JSON.stringify(flatSlotList));
+    localStorage.removeItem(
+      "Parking-slot-list",
+      JSON.stringify(parkingSlotList)
+    );
+  };
   return (
     <>
       <Box>
         <Grid container spacing={0}>
-          <Grid item xs={5} style={{ margin: "auto" }}>
-            <FlatSlot
-              flatSlotList={flatSlotList}
-              setFlatSlotList={setFlatSlotList}
-              show={show}
-            />
-          </Grid>
-          <Grid item xs={5} style={{ margin: "auto" }}>
-            <ParkingSlot
-              parkingSlotList={parkingSlotList}
-              setParkingSlotList={setParkingSlotList}
-              show={show}
-            />
-          </Grid>
-          
+          <FlatSlot
+            flatSlotList={flatSlotList}
+            setFlatSlotList={setFlatSlotList}
+            show={show}
+          />
+          <ParkingSlot
+            parkingSlotList={parkingSlotList}
+            setParkingSlotList={setParkingSlotList}
+            show={show}
+          />
 
-          <Grid
-            item
-            xs={12}
-            style={{
-              textAlign: "center",
-            }}
-          >  
-            <LockListing setShow={setShow} />
-            
-          <br />
-          <br />
+          <Grid container spacing={0}>
+            <LockListing
+              handleOpen={handleOpen}
+              setType={setType}
+              flatSlotList={flatSlotList}
+              setShow={setShow}
+            />
+
+            <AlotSlot SlotsHandler={SlotsHandler} />
           </Grid>
-         
-          <Grid item xs={8} style={{ margin: "auto" }}>
-            <Alotted SlotsHandler={SlotsHandler} updatedValue={updatedValue} />
-          </Grid>
+
+          <SaveAlottedData
+            alottedDataSaveHandler={alottedDataSaveHandler}
+            updatedValue={updatedValue}
+          />
         </Grid>
+
+        <ResetListing resetDataHandler={resetDataHandler} />
+        {type == 1 && (
+          <SaveAllocationModal open={open} handleClose={handleClose} />
+        )}
+        {type == 2 && (
+          <LockListingModal open={open} handleClose={handleClose} />
+        )}
+        <br />
+        <br />
       </Box>
     </>
   );
