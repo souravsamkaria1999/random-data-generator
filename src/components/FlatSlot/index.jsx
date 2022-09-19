@@ -4,7 +4,7 @@ import Paper from "@mui/material/Paper";
 import classes from "./index.module.css";
 import FlatSlotInfo from "./FlatSlotInfo/index";
 import TextField from "@mui/material/TextField";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Tooltip, Typography } from "@mui/material";
 import { FlatSlotContent } from "../../Content/index";
 import Grid from "@mui/material/Grid";
 const Item = styled(Paper)(({ theme }) => ({
@@ -12,6 +12,8 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(5),
   margin: theme.spacing(1),
 }));
+const ALPHA_NUMERIC_DASH_REGEX = /^[a-zA-Z0-9-]+$/;
+
 const FlatSlot = ({ flatSlotList, setFlatSlotList, show }) => {
   const [flatSlotInput, setFlatSlotInput] = useState();
   const inputChangeHandler = (e) => {
@@ -27,8 +29,10 @@ const FlatSlot = ({ flatSlotList, setFlatSlotList, show }) => {
     setFlatSlotInput("");
   };
   const checkflatInput = checkflatValue?.includes(1);
+
+  console.log(show);
   return (
-    <Grid item xs={5} style={{ margin: "auto" }}>
+    <Grid item sm={5} md={5} style={{ margin: "auto" }}>
       <Item className={classes.backgroundColor}>
         <Typography variant="heading" className={classes.heading}>
           {FlatSlotContent[0]}
@@ -36,12 +40,17 @@ const FlatSlot = ({ flatSlotList, setFlatSlotList, show }) => {
         <hr />
         <br />
         <FlatSlotInfo flatSlotList={flatSlotList} />
-        <Box component="form" noValidate autoComplete="off">
+        <Box component="form" autoComplete="off">
           <TextField
             sx={{
               mt: 3,
               ml: 0,
               width: "25ch",
+            }}
+            onKeyDown={(event) => {
+              if (!ALPHA_NUMERIC_DASH_REGEX.test(event.key)) {
+                event.preventDefault();
+              }
             }}
             size={FlatSlotContent[6]}
             error={checkflatValue?.includes(1) ? true : false}

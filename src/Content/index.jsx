@@ -25,6 +25,5 @@ export const LockListingModalContent = [
   "Please enter details before lock listing",
 ];
 export const SaveAllocationModalContent = ["Warning:", "No slot available"];
-export const ResetListingContent = ["Reset"];
+export const ResetListingContent = ["Delete all details", "Reset"];
 export const AlotSlotContent = ["Alot Slot"];
-

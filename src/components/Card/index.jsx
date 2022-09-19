@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Alotted from "../SaveAlottedData/index";
 import { styled } from "@mui/material/styles";
 import FlatSlot from "../FlatSlot/index";
 import ParkingSlot from "../ParkingSlot/index";
@@ -11,6 +10,7 @@ import ResetListing from "../ResetListing/index";
 import SaveAllocationModal from "../Modals/SaveAllocationModal";
 import LockListingModal from "../Modals/LockListingModal";
 import AlotSlot from "../AlotSlot";
+import SaveAlottedData from "../SaveAlottedData/index";
 const getFlatData = () => {
   let list = localStorage.getItem("Flat list");
   if (list) {
@@ -110,11 +110,12 @@ const Card = () => {
             <AlotSlot SlotsHandler={SlotsHandler} />
           </Grid>
 
-          <Alotted
+          <SaveAlottedData
             alottedDataSaveHandler={alottedDataSaveHandler}
             updatedValue={updatedValue}
           />
         </Grid>
+
         <ResetListing resetDataHandler={resetDataHandler} />
         {type == 1 && (
           <SaveAllocationModal open={open} handleClose={handleClose} />
@@ -122,6 +123,8 @@ const Card = () => {
         {type == 2 && (
           <LockListingModal open={open} handleClose={handleClose} />
         )}
+        <br />
+        <br />
       </Box>
     </>
   );

@@ -12,6 +12,8 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(5),
   margin: theme.spacing(1),
 }));
+const ALPHA_NUMERIC_DASH_REGEX = /^[a-zA-Z0-9-]+$/;
+
 const ParkingSlot = ({ parkingSlotList, setParkingSlotList, show }) => {
   const [parkingSlotInput, setParkingSlotInput] = useState();
 
@@ -32,7 +34,7 @@ const ParkingSlot = ({ parkingSlotList, setParkingSlotList, show }) => {
   };
   const checkParkingInput = checkParkingValue?.includes(1);
   return (
-    <Grid item xs={5} style={{ margin: "auto" }}>
+    <Grid item sm={5} md={5} style={{ margin: "auto" }}>
       <Item>
         <Typography variant="heading" className={classes.heading}>
           {ParkingSlotContent[0]}
@@ -59,6 +61,11 @@ const ParkingSlot = ({ parkingSlotList, setParkingSlotList, show }) => {
               mt: 3,
               ml: 0,
               width: "25ch",
+            }}
+            onKeyDown={(event) => {
+              if (!ALPHA_NUMERIC_DASH_REGEX.test(event.key)) {
+                event.preventDefault();
+              }
             }}
             size="small"
             error={checkParkingValue?.includes(1) ? true : false}

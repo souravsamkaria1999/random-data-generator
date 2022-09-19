@@ -5,14 +5,28 @@ import Paper from "@mui/material/Paper";
 import { Box, Button, Typography } from "@mui/material";
 import { AlottedSlotContent } from "../../Content";
 import Grid from "@mui/material/Grid";
-
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#F0F8FD",
   padding: theme.spacing(5),
   margin: theme.spacing(1),
 }));
 const SaveAlottedData = ({ alottedDataSaveHandler, updatedValue }) => {
-  const NewUser = updatedValue?.map((value, key) => {
+  const array = updatedValue;
+
+  const updatedAlottedValue = array.reduce(function (
+    updatedAlottedValue,
+    key,
+    index
+  ) {
+    return (
+      (index % 2 == 0
+        ? updatedAlottedValue.push([key])
+        : updatedAlottedValue[updatedAlottedValue.length - 1].push(key)) &&
+      updatedAlottedValue
+    );
+  },
+  []);
+  const NewUser = updatedAlottedValue?.map((value, key) => {
     return (
       <Typography
         variant="container"
@@ -22,7 +36,9 @@ const SaveAlottedData = ({ alottedDataSaveHandler, updatedValue }) => {
         {value != undefined ? (
           <Typography variant="outer_box" className={classes.outer_box}>
             <Typography variant="title" className={classes.title}>
-              {value}
+              {value[0]}
+              <hr />
+              {value[1]}
             </Typography>
           </Typography>
         ) : null}
@@ -30,7 +46,7 @@ const SaveAlottedData = ({ alottedDataSaveHandler, updatedValue }) => {
     );
   });
   return (
-    <Grid item xs={8} style={{ margin: "auto" }}>
+    <Grid item sm={12} md={8} style={{ margin: "auto" }}>
       <Item>
         <Typography variant="heading" className={classes.heading}>
           {AlottedSlotContent[0]}
@@ -40,7 +56,7 @@ const SaveAlottedData = ({ alottedDataSaveHandler, updatedValue }) => {
         <div variant="scrolling_box" className={classes.scrolling_box}>
           {NewUser}
         </div>
-        <Box data-testid="show-alotted-value">
+        <Box>
           <center>
             <Button
               sx={{ mt: 6, ml: 4, width: "23ch" }}
