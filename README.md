@@ -1,216 +1,100 @@
-# Getting Started with Create React App
+> # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is is related to show the random user generator
 
-## Available Scripts
+> ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm run dev`
 
-Runs the app in the development mode.\
+Run the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-### `npm test`
+### `npm run test`
 
-Launches the test runner in the interactive watch mode.\
+Launches the test runner in the interactive watch mode.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
+Builds the app for production to the `build` folder.
 
-### `npm install react-router-dom@5`
+> # Storybook Installation
 
-React Router is a collection of navigational components that compose declaratively with your application.
+## Add Storybook:
 
-## app.js
+Use the Storybook CLI to install it in a single command. Run this inside your existing project’s root directory:
 
- <Switch>
-        <Route path="/Home" component={HomePage} />
-        <Route path="/UserInfoGit" component={GitUserDetails} />
-        <Route path="/TodoList" component={TodoList} />
-        <Route path="/Theme" component={Theme} />
-        <Route path="/About" component={About} />
-      </Switch>
+### `npx storybook init`
 
-## index.js
+> # Run Storybook:
 
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import { Provider } from "react-redux";
-import { configureStore } from "./store";
+### `npm run storybook`
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-<Provider store={configureStore()}>
-<BrowserRouter>
-<App />
-</BrowserRouter>
-</Provider>
-);
+It will start Storybook locally and output the address. Depending on your system configuration, it will automatically open the address in a new browser tab, and you'll be greeted by a welcome screen.
 
-## Storybook
+> # Install Testing Library
 
-Build component driven UIs faster
-Storybook is an open source tool for building UI components and pages in isolation.
-It streamlines UI development, testing, and documentation
+## Next.js with Jest and React Testing Library
 
-### npm run storybook
+### `yarn add -D @testing-library/jest-dom @testing-library/react babel-jest jest`
 
-It will start Storybook locally and output the address. Depending on your system configuration, it will automatically open the address in a new browser tab, and you'll be greeted by a welcome screen
+The project consists of three pages which will displayed in one screen
 
-### npm install --save-dev @testing-library/react jest
+> ## `Flat SLot`
 
-Snapshot test is added
-Test Content
-Test context Use case is added
+- Go to the project > src > components > FlatSlot > index.jsx
+- in this component i added functionality that is if any one can type flat details with numeric and click enter the data will show in the upper box
 
-for reference Test and TestUseCase folder
+> ## `FlatSlotInfo`
 
-### npm install redux
+- The box which is displayed above the input box that is the flatSlotInfo component where the details show after entered
 
-### npm install react-redux
+> ## `Parking SLot`
 
-React-Redux is conceptually pretty simple. It subscribes to the Redux store, checks to see if the data your component wants has changed, and re-renders your component.
+- Go to the project > src > components > ParkingSLot > index.jsx
+- in this component i added functionality that is if any one can type parking details with numeric and click enter the data will show in the upper box
 
-Use for Global State management
+> ## `ParkingSlotDetails`
 
-Added folder name store , store.js for configure store
+- The box which is displayed above the input box that is the flatSlotInfo component where the details show with a default text after entered
 
-## actions
+> ## `Modal`
 
-import { get } from "../api/axios.js";
+- Go to the project > src > components > Modal
+- In the modals components it has two other components inside it. The first one is locallistingModal and the second is saveallocationModal. Modal basically show the message when try to do something wrong with screen.
 
-export const CREATE_TODO = "CREATE_TODO";
-export const createTodo = (text) => ({
-type: CREATE_TODO,
-payload: { text },
-});
+> ## `locklistingModal`-
 
-export const REMOVE_TODO = "REMOVE_TODO";
-export const removeTodo = (text) => ({
-type: REMOVE_TODO,
-payload: { text },
-});
+- Go to the project > src > components > Modal >
+- locklistingModal
+- When the flat and parking anyone of the data has been empty and you can try to lock that field then it show you the message/alert .
 
-## reducers
+> ## `saveallocationModal`-
 
-import { CREATE_TODO, REMOVE_TODO, USER_ROLE_SUCCESS } from "./actions";
+- Go to the project > src > components > Modal >
+  saveallocation
+- When you have no data to save and you are try to save it then a message is displayed in that condition which has come with the help of saveallocation modal.
 
-export const todos = (state = [], action) => {
-const { type, payload } = action;
+> ## `ResetListing`
 
-switch (type) {
-case CREATE_TODO: {
-const { text } = payload;
-const newTodo = {
-text,
-isCompleted: false,
-};
-return state.concat(newTodo);
-}
+- Go to the project > src > components > ResetListing
+- when you are think about clear delete try the reset button to clear all data.
 
-    case REMOVE_TODO: {
-      const { text } = payload;
-      return state.filter((todo) => todo.text !== text);
-    }
+> ## `AlotSlot`
 
-    default:
-      return state;
+- If the data is present in both the flat and parking slot table then you can easily press the alot slot button and then the data will be displayed on the allotted page.
 
-}
-};
+> ## Working:
 
-# Inside Component
+```diff
 
-import React from "react";
-import { removeTodo } from "./actions";
-import { connect } from "react-redux";
-import NewTodoForm from "./NewTodoForm";
-import TodoListItem from "./TodoListItem";
++  Enter an flat data in flat slot
++  Enter an parking data in parking slot
++  click on the lock listing to disable input field
++ click on alot slot button data should be display in alotted section
++ Click on saveAllocation to save the data
++ Reset button use to reset all data
 
-const TodoList = ({ todos = [], onRemovePressed }) => (
 
-  <div className="list-wrapper">
-    <NewTodoForm />
-    {todos.map((todo) => (
-      <TodoListItem todo={todo} onRemovePressed={onRemovePressed} />
-    ))}
-  </div>
-);
-
-const mapStateToProps = (state) => ({
-todos: state.todos,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-onRemovePressed: (text) => dispatch(removeTodo(text)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
-
-### npm install axios
-
-Added api folder for use import api/axios.js into your component and use the same
-
-export function getUserRole(userId) {
-return async () => {
-const response = await get(`Path/${userId}`);
-if (response && response.status === 200 && response.data) {
-getUsersRoleSuccess(response.data);
-} else {
-getUsersRoleFailure("Please Try again");
-}
-};
-}
-
-Promise based HTTP client for the browser and node.js
-
-Features
-Make XMLHttpRequests from the browser
-Make http requests from node.js
-Supports the Promise API
-Intercept request and response
-Transform request and response data
-Cancel requests
-Automatic transforms for JSON data
-Client side support for protecting against XSRF
-
-### npm install express
-
-Fast, unopinionated, minimalist web framework for node.
-
-const express = require('express')
-const app = express()
-
-app.get('/', function (req, res) {
-res.send('Hello World')
-})
-
-app.listen(8000)
-
-### npm install cors
-
-This is a Node.js module available through the npm registry. Installation is done using the npm install command:
-
-$ npm install cors
-
-Usage
-
-Simple Usage (Enable All CORS Requests)
-var express = require('express')
-var cors = require('cors')
-var app = express()
-
-app.use(cors())
-
-### Added Context
-
-Add context folder inside this Authcontext.js , AuthData.js filefor creating and provide context data
-user.js consumes the context
-Add wrapper in App.js file for context
-# random-user-generator
+```
