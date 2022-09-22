@@ -1,8 +1,11 @@
-import { Button, Grid } from "@mui/material";
 import React from "react";
-import { LockListingContent } from "../../Content";
 import classes from "./index.module.css";
+import { Button, Grid } from "@mui/material";
+import { LockListingConstant } from "../../Constant";
+import PropTypes from "prop-types";
+
 const LockListing = ({ handleOpen, setType, flatSlotList, setShow }) => {
+  // disabled input fields
   const BtnHandler = () => {
     if (flatSlotList?.length > 0) {
       setShow(true);
@@ -24,7 +27,7 @@ const LockListing = ({ handleOpen, setType, flatSlotList, setShow }) => {
         variant="contained"
         onClick={BtnHandler}
       >
-        <div className={classes.lock_btn}> {LockListingContent[0]}</div>{" "}
+        <span className={classes.lock_btn}> {LockListingConstant[0]}</span>{" "}
       </Button>
       <br />
       <br />
@@ -32,4 +35,10 @@ const LockListing = ({ handleOpen, setType, flatSlotList, setShow }) => {
   );
 };
 
+LockListing.propTypes = {
+  handleOpen: PropTypes.func,
+  setType: PropTypes.func,
+  flatSlotList: PropTypes.array,
+  setShow: PropTypes.func,
+};
 export default LockListing;

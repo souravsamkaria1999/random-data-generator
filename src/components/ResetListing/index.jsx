@@ -1,22 +1,25 @@
 import React from "react";
-import { Button, Tooltip } from "@mui/material";
-import { ResetListingContent } from "../../Content";
 import classes from "./index.module.css";
+import { Button, Tooltip } from "@mui/material";
+import { ResetListingConstant } from "../../Constant";
+import PropTypes from "prop-types";
+
 const ResetListing = ({ resetDataHandler }) => {
-  
   return (
     <center>
-      <Tooltip title={ResetListingContent[0]} arrow>
+      <Tooltip title={ResetListingConstant[0]} arrow>
         <Button
           sx={{ mt: 3, ml: 1, width: "17ch" }}
           variant="contained"
           onClick={resetDataHandler}
         >
-          <div className={classes.save_btn}> {ResetListingContent[1]}</div>
+          <span className={classes.save_btn}> {ResetListingConstant[1]}</span>
         </Button>
       </Tooltip>
     </center>
   );
 };
-
+ResetListing.propTypes = {
+  resetDataHandler: PropTypes.func,
+};
 export default ResetListing;
