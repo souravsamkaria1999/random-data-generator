@@ -1,14 +1,9 @@
-import { Button, Grid } from "@mui/material";
 import React from "react";
 import classes from "./index.module.css";
-import { AlotSlotContent } from "../../Content/index";
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
+import { Button, Grid } from "@mui/material";
+import { AlotSlotConstant } from "../../Constant/index";
+import PropTypes from "prop-types";
 const AlotSlot = ({ SlotsHandler }) => {
-  const Item = styled(Paper)(({ theme }) => ({
-    padding: theme.spacing(5),
-    margin: theme.spacing(1),
-  }));
   return (
     <Grid
       item
@@ -26,10 +21,13 @@ const AlotSlot = ({ SlotsHandler }) => {
         variant="contained"
         size="small"
       >
-        <div className={classes.save_btn}>{AlotSlotContent[0]}</div>
+        <span className={classes.save_btn}>{AlotSlotConstant[0]}</span>
       </Button>
     </Grid>
   );
 };
 
+AlotSlot.propTypes = {
+  SlotsHandler: PropTypes.func,
+};
 export default AlotSlot;

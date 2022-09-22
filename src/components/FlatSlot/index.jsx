@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import classes from "./index.module.css";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import classes from "./index.module.css";
-import FlatSlotInfo from "./FlatSlotInfo/index";
-import TextField from "@mui/material/TextField";
-import { Box, Button, Tooltip, Typography } from "@mui/material";
-import { FlatSlotContent } from "../../Content/index";
 import Grid from "@mui/material/Grid";
+import { Box, Button, Typography } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import FlatSlotInfo from "./FlatSlotInfo/index";
+import { FlatSlotConstant } from "../../Constant/index";
+import PropTypes from "prop-types";
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#828382" : "#F0F8FD",
   padding: theme.spacing(5),
@@ -19,23 +21,23 @@ const FlatSlot = ({ flatSlotList, setFlatSlotList, show }) => {
   const inputChangeHandler = (e) => {
     setFlatSlotInput(e.target.value);
   };
-
-  const checkflatValue = flatSlotList?.map((item) =>
-    item == flatSlotInput ? 1 : 0
-  );
+  // flat Slot submit handler
   const FlatInputSubmitHandler = (e) => {
     e.preventDefault();
     setFlatSlotList([...flatSlotList, flatSlotInput].reverse());
     setFlatSlotInput("");
   };
-  const checkflatInput = checkflatValue?.includes(1);
 
-  console.log(show);
+  // btn enable disable handler
+  const checkflatValue = flatSlotList?.map((item) =>
+    item == flatSlotInput ? 1 : 0
+  );
+  const checkflatInput = checkflatValue?.includes(1);
   return (
     <Grid item sm={5} md={5} style={{ margin: "auto" }}>
       <Item className={classes.backgroundColor}>
         <Typography variant="heading" className={classes.heading}>
-          {FlatSlotContent[0]}
+          {FlatSlotConstant[0]}
         </Typography>
         <hr />
         <br />
@@ -47,25 +49,25 @@ const FlatSlot = ({ flatSlotList, setFlatSlotList, show }) => {
               ml: 0,
               width: "25ch",
             }}
+            type="text"
+            size={FlatSlotConstant[6]}
+            label={
+              checkflatValue?.includes(1) ? (
+                <div className={classes.inter_font}>{FlatSlotConstant[1]}</div>
+              ) : (
+                <div className={classes.inter_font}>{FlatSlotConstant[2]}</div>
+              )
+            }
+            value={flatSlotInput}
+            error={checkflatValue?.includes(1) ? true : false}
             onKeyDown={(event) => {
               if (!ALPHA_NUMERIC_DASH_REGEX.test(event.key)) {
                 event.preventDefault();
               }
             }}
-            size={FlatSlotContent[6]}
-            error={checkflatValue?.includes(1) ? true : false}
-            label={
-              checkflatValue?.includes(1) ? (
-                <div className={classes.inter_font}>{FlatSlotContent[1]}</div>
-              ) : (
-                <div className={classes.inter_font}>{FlatSlotContent[2]}</div>
-              )
-            }
-            type="text"
-            value={flatSlotInput}
             helperText={
               checkflatValue?.includes(1) ? (
-                <div className={classes.inter_font}>{FlatSlotContent[3]}</div>
+                <div className={classes.inter_font}>{FlatSlotConstant[3]}</div>
               ) : (
                 ""
               )
@@ -76,19 +78,23 @@ const FlatSlot = ({ flatSlotList, setFlatSlotList, show }) => {
           />
           <Button
             sx={{ mt: 3, ml: 1, width: "12ch" }}
-            type={FlatSlotContent[4]}
+            type={FlatSlotConstant[4]}
+            variant={FlatSlotConstant[7]}
+            data-testid={FlatSlotConstant[5]}
+            size={FlatSlotConstant[6]}
             onClick={FlatInputSubmitHandler}
             disabled={checkflatInput || show || !flatSlotInput}
-            variant={FlatSlotContent[7]}
-            data-testid={FlatSlotContent[5]}
-            size={FlatSlotContent[6]}
           >
-            <div className={classes.save_btn}>{FlatSlotContent[4]}</div>
+            <span className={classes.save_btn}>{FlatSlotConstant[4]}</span>
           </Button>
         </Box>
       </Item>
     </Grid>
   );
 };
-
+FlatSlot.propTypes = {
+  flatSlotList: PropTypes.array,
+  setFlatSlotList: PropTypes.func,
+  show: PropTypes.bool,
+};
 export default FlatSlot;

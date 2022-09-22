@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import FlatSlot from "../FlatSlot/index";
 import ParkingSlot from "../ParkingSlot/index";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
 import LockListing from "../LockListing";
+import AlotSlot from "../AlotSlot";
+import SaveAlottedData from "../SaveAlottedData/index";
 import ResetListing from "../ResetListing/index";
 import SaveAllocationModal from "../Modals/SaveAllocationModal";
 import LockListingModal from "../Modals/LockListingModal";
-import AlotSlot from "../AlotSlot";
-import SaveAlottedData from "../SaveAlottedData/index";
 const getFlatData = () => {
   let list = localStorage.getItem("Flat list");
   if (list) {
@@ -40,15 +38,16 @@ const getAlottedData = () => {
 const Card = () => {
   const [flatSlotList, setFlatSlotList] = useState(getFlatData());
   const [parkingSlotList, setParkingSlotList] = useState(getParkingData());
+  const [updatedValue, setUpdatedValue] = useState(getAlottedData());
+
   const [show, setShow] = useState(false);
+  const [type, setType] = useState(0);
+  const [open, setOpen] = React.useState(false);
   var flatRandomValue = flatSlotList[~~(Math.random() * flatSlotList.length)];
   var ParkingRandomValue =
     parkingSlotList[~~(Math.random() * parkingSlotList.length)];
-  const [updatedValue, setUpdatedValue] = useState(getAlottedData());
-  const [type, setType] = useState(0);
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+
+  // help to assign alotted slot
   const SlotsHandler = () => {
     if (flatRandomValue && ParkingRandomValue != undefined) {
       setUpdatedValue([...updatedValue, flatRandomValue, ParkingRandomValue]);
@@ -61,12 +60,20 @@ const Card = () => {
       setType(1);
     }
   };
+
   const flatFinalValue = [updatedValue?.[0]];
   const parkingFinalValue = [updatedValue?.[1]];
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  // set data in local storage
   React.useEffect(() => {
     localStorage.setItem("Flat list", JSON.stringify(flatSlotList));
     localStorage.setItem("Parking-slot-list", JSON.stringify(parkingSlotList));
   }, [flatFinalValue, parkingFinalValue, flatSlotList, parkingSlotList]);
+
+  // save data in local storage
   const alottedDataSaveHandler = () => {
     if (updatedValue.length > 0) {
       localStorage.setItem("Alotted-slot-list", JSON.stringify(updatedValue));
@@ -75,6 +82,8 @@ const Card = () => {
       setType(1);
     }
   };
+
+  //  reset all data present in flat, parking as well as alotted slot
   const resetDataHandler = () => {
     window.location.reload(false);
     localStorage.removeItem("Alotted-slot-list", JSON.stringify(updatedValue));

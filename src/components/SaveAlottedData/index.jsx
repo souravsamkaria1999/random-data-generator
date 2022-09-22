@@ -1,19 +1,20 @@
 import React from "react";
-import { styled } from "@mui/material/styles";
 import classes from "./index.module.css";
+import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import { Box, Button, Typography } from "@mui/material";
-import { AlottedSlotContent } from "../../Content";
 import Grid from "@mui/material/Grid";
+import { Box, Button, Typography } from "@mui/material";
+import { AlottedSlotConstant } from "../../Constant";
+import PropTypes from "prop-types";
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#F0F8FD",
   padding: theme.spacing(5),
   margin: theme.spacing(1),
 }));
 const SaveAlottedData = ({ alottedDataSaveHandler, updatedValue }) => {
-  const array = updatedValue;
-
-  const updatedAlottedValue = array.reduce(function (
+  // save data in local storage
+  const updatedAlottedValue = updatedValue.reduce(function (
     updatedAlottedValue,
     key,
     index
@@ -49,7 +50,7 @@ const SaveAlottedData = ({ alottedDataSaveHandler, updatedValue }) => {
     <Grid item sm={12} md={8} style={{ margin: "auto" }}>
       <Item>
         <Typography variant="heading" className={classes.heading}>
-          {AlottedSlotContent[0]}
+          {AlottedSlotConstant[0]}
         </Typography>
         <hr />
         <br />
@@ -60,12 +61,12 @@ const SaveAlottedData = ({ alottedDataSaveHandler, updatedValue }) => {
           <center>
             <Button
               sx={{ mt: 6, ml: 4, width: "23ch" }}
-              type={AlottedSlotContent[1]}
+              type={AlottedSlotConstant[1]}
               onClick={alottedDataSaveHandler}
               style={{ marginLeft: "10px" }}
               variant="contained"
             >
-              <div className={classes.save_btn}> {AlottedSlotContent[1]}</div>
+              <div className={classes.save_btn}> {AlottedSlotConstant[1]}</div>
             </Button>
           </center>
         </Box>
@@ -73,5 +74,8 @@ const SaveAlottedData = ({ alottedDataSaveHandler, updatedValue }) => {
     </Grid>
   );
 };
-
+SaveAlottedData.propTypes = {
+  alottedDataSaveHandler: PropTypes.func,
+  updatedValue: PropTypes.array,
+};
 export default SaveAlottedData;

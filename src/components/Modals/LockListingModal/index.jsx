@@ -2,7 +2,9 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Modal } from "@mui/material";
-import { LockListingModalContent } from "../../../Content/index";
+import { LockListingModalConstant } from "../../../Constant/index";
+import PropTypes from "prop-types";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -30,11 +32,9 @@ const LockListingModal = ({ open, handleClose }) => {
             component="h2"
             style={{ textAlign: "center", color: "#1976d2" }}
           >
-            {LockListingModalContent[0]}
+            {LockListingModalConstant[0]}
           </Typography>
           <Typography
-            id="modal-modal-description"
-            variant="h5"
             sx={{
               pb: 5,
               pt: 3,
@@ -42,8 +42,10 @@ const LockListingModal = ({ open, handleClose }) => {
               width: 300,
               margin: "auto",
             }}
+            id="modal-modal-description"
+            variant="h5"
           >
-            {LockListingModalContent[1]}
+            {LockListingModalConstant[1]}
           </Typography>
         </Box>
       </Modal>
@@ -51,4 +53,8 @@ const LockListingModal = ({ open, handleClose }) => {
   );
 };
 
+LockListingModal.propTypes = {
+  open: PropTypes.bool,
+  handleClose: PropTypes.func,
+};
 export default LockListingModal;
